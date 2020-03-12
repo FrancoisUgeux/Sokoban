@@ -1,5 +1,6 @@
 package esi.atl.g43335.sokoban.Model;
 
+import esi.atl.g43335.sokoban.Model.items.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
@@ -16,7 +17,7 @@ public class Maze {
     private final Cell[][] cells;
     private Game game;
     private Position start;
-    private ArrayList<Box> boxes;
+    private ArrayList<Position> boxes;
     private ArrayList<Position> goals;
     private String level
             = "    ######\n"
@@ -35,7 +36,7 @@ public class Maze {
         cells = new Cell[ROWS][COLUMNS];
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLUMNS; j++) {
-                cells[i][j] = new Cell(CellType.EMPTY);
+                cells[i][j] = new Cell();
             }
         }
         //game.getCurrentLevel()
@@ -52,31 +53,32 @@ public class Maze {
                     char item = line.charAt(i);
                     switch (item) {
                         case '#':
-                            cells[currentLine][i] = new Cell(CellType.WALL);
+                            cells[currentLine][i] = new Cell(new Wall());
                             break;
                         case '$':
-                            Box b = new Box(new Position(currentLine, i));
+                            Position posB = new Position(currentLine,i);
+                            Box b = new Box();
                             cells[currentLine][i] = new Cell(b);
-                            boxes.add(b);
+                            boxes.add(posB);
                             break;
                         case '.':
-                            Position pos = new Position(currentLine, i);
-                            cells[currentLine][i] = new Cell(CellType.GOAL);
-                            goals.add(pos);
+                            Position posG = new Position(currentLine, i);
+                            cells[currentLine][i] = new Cell(new Goal());
+                            goals.add(posG);
                             break;
                         case '@':
                             start = new Position(currentLine, i);
-                            cells[currentLine][i] = new Cell(new Player(start, game.getNbMoves()));
+                            cells[currentLine][i] = new Cell(new Player(0));
                             break;
                         case ' ':
-                            cells[currentLine][i] = new Cell(CellType.EMPTY);
+                            cells[currentLine][i] = new Cell(new Floor());
                             break;
                         default:
                             break;
                     }
                 }
                 for (int i = Math.min(COLUMNS, line.length()); i < COLUMNS; i++) {
-                    cells[currentLine][i] = new Cell(CellType.EMPTY);
+                    cells[currentLine][i] = new Cell(new Floor());
                 }
                 currentLine++;
             }
@@ -92,7 +94,7 @@ public class Maze {
         return cells[position.getRow()][position.getColumn()];
     }
 
-    public ArrayList<Box> getBoxes() {
+    public ArrayList<Position> getBoxes() {
         return boxes;
     }
 
@@ -103,8 +105,8 @@ public class Maze {
                 && position.getColumn() >= 0);
     }
 
-    public boolean isEmpty(Position p) {
-        return true;
+    public boolean isFree(Position p) {
+        return cells[p.getRow()][p.getColumn()].isFree();
     }
 
     boolean isGoal(Position p) {
@@ -115,4 +117,10 @@ public class Maze {
         }
         return true;
     }
+
+    public Cell[][] getCells() {
+        return cells;
+    }
+    
+    
 }

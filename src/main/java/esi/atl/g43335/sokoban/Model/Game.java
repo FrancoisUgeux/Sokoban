@@ -1,5 +1,6 @@
 package esi.atl.g43335.sokoban.Model;
 
+import esi.atl.g43335.sokoban.Model.items.Box;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -38,9 +39,9 @@ public class Game {
     }
 
     public boolean isOver() {
-        ArrayList<Box> boxes = maze.getBoxes();
-        for (Box box : boxes) {
-            if (!isGoal(box.getPosition())) {
+        ArrayList<Position> boxes = maze.getBoxes();
+        for (Position box : boxes) {
+            if (!isGoal(box)) {
                 return false;
             }
         }

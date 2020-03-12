@@ -1,34 +1,39 @@
 package esi.atl.g43335.sokoban.Model;
 
+import esi.atl.g43335.sokoban.Model.items.Floor;
+
 /**
  *
  * @author franc
  */
 public class Cell {
 
-    private CellType type;
-    private final boolean moveable;
+    private Item item;
 
-    public Cell(CellType type) {
-        this.type = type;
-        moveable = false;
+    public Cell(Item item) {
+        this.item = item;
+    }
+    
+    public Cell(){
+        this.item = new Floor();
     }
 
-    //??
-    public Cell(Box box) {
-        moveable = true;
+    public Item getItem() {
+        return item;
     }
-
-    //??
-    public Cell(Player player) {
-        moveable = true;
+    
+    public boolean isFree(){
+        return item == new Floor();
     }
-
-    public CellType getType() {
-        return type;
+    
+    public void put(Item item){
+        if(!this.item.isCrosseable()){
+            throw new IllegalStateException("Must be a crosseable item(goal,floor)");
+        }
+        this.item = item;
     }
-
-    public boolean getMoveable() {
-        return moveable;
+    
+    public void remove(){
+        item = new Floor();
     }
 }
