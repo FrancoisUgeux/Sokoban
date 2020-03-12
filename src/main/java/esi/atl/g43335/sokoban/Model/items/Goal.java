@@ -1,8 +1,8 @@
 
-package esi.atl.g43335.sokoban.Model.items;
+package esi.atl.g43335.sokoban.model.items;
 
-import esi.atl.g43335.sokoban.Model.Item;
-import esi.atl.g43335.sokoban.Model.ItemType;
+import esi.atl.g43335.sokoban.model.Item;
+import esi.atl.g43335.sokoban.model.ItemType;
 
 /**
  *

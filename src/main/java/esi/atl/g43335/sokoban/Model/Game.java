@@ -1,6 +1,6 @@
-package esi.atl.g43335.sokoban.Model;
+package esi.atl.g43335.sokoban.model;
 
-import esi.atl.g43335.sokoban.Model.items.Box;
+import esi.atl.g43335.sokoban.model.items.Box;
 import java.util.ArrayList;
 import java.util.Stack;
 

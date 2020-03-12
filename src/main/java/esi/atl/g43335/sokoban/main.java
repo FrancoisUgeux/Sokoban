@@ -1,8 +1,8 @@
 
 package esi.atl.g43335.sokoban;
 
-import esi.atl.g43335.sokoban.Model.Game;
-import esi.atl.g43335.sokoban.Model.Maze;
+import esi.atl.g43335.sokoban.model.Game;
+import esi.atl.g43335.sokoban.model.Maze;
 import esi.atl.g43335.sokoban.view.View;
 
 /**

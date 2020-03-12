@@ -1,4 +1,4 @@
-package esi.atl.g43335.sokoban.Model;
+package esi.atl.g43335.sokoban.model;
 
 /**
  *

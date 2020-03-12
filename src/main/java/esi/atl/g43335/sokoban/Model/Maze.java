@@ -1,7 +1,8 @@
-package esi.atl.g43335.sokoban.Model;
+package esi.atl.g43335.sokoban.model;
 
-import esi.atl.g43335.sokoban.Model.items.*;
+import esi.atl.g43335.sokoban.model.items.*;
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class Maze {
     private Position start;
     private ArrayList<Position> boxes;
     private ArrayList<Position> goals;
-    private String level
+    private String level //a supprimer après gestion du xsb
             = "    ######\n"
             + "    ##   #\n"
             + "    ##$  #\n"
@@ -40,12 +41,12 @@ public class Maze {
             }
         }
         //game.getCurrentLevel()
-        levelBuilder(level);
+        levelBuilder(level); //doit appeler le fichier xsb
     }
 
     private void levelBuilder(String level) {
         int currentLine = 0;
-        try ( BufferedReader reader = new BufferedReader(new StringReader(level))) {
+        try ( BufferedReader reader = new BufferedReader(new FileReader(level))) {
             String line = reader.readLine();
             while (line != null) {
                 line = reader.readLine();
@@ -118,8 +119,9 @@ public class Maze {
         return true;
     }
 
-    public Cell[][] getCells() {
-        return cells;
+    public Cell[][] getCells() { // a vérifier ???
+        Cell[][] copyCells = cells;
+        return copyCells;
     }
     
     

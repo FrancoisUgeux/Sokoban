@@ -1,6 +1,6 @@
-package esi.atl.g43335.sokoban.Model;
+package esi.atl.g43335.sokoban.model;
 
-import esi.atl.g43335.sokoban.Model.items.Floor;
+import esi.atl.g43335.sokoban.model.items.Floor;
 
 /**
  *
