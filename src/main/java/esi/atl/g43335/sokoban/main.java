@@ -3,7 +3,7 @@ package esi.atl.g43335.sokoban;
 
 import esi.atl.g43335.sokoban.model.Game;
 import esi.atl.g43335.sokoban.model.Maze;
-import esi.atl.g43335.sokoban.view.View;
+import esi.atl.g43335.sokoban.view.viewwwww;
 
 /**
  *
@@ -12,7 +12,7 @@ import esi.atl.g43335.sokoban.view.View;
 public class main {
     public static void main(String[] args) {
         Game game = new Game(0);
-        View view = new View();
+        viewwwww view = new viewwwww();
         Maze maze = new Maze();
         view.displayMaze(maze.getCells());
     }

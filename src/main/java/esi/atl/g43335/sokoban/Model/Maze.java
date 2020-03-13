@@ -41,12 +41,12 @@ public class Maze {
             }
         }
         //game.getCurrentLevel()
-        levelBuilder(level); //doit appeler le fichier xsb
+        levelBuilder(); //doit appeler le fichier xsb
     }
 
-    private void levelBuilder(String level) {
+    private void levelBuilder() {
         int currentLine = 0;
-        try ( BufferedReader reader = new BufferedReader(new FileReader(level))) {
+        try ( BufferedReader reader = new BufferedReader(new FileReader(level1))) {
             String line = reader.readLine();
             while (line != null) {
                 line = reader.readLine();
