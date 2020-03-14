@@ -8,7 +8,7 @@ import java.util.Scanner;
  *
  * @author franc
  */
-public class viewwwww {
+public class View {
 
     private Scanner in = new Scanner(System.in);
 
@@ -25,7 +25,10 @@ public class viewwwww {
                     System.out.print("#");
                 } else if (cell.getItem().getType() == ItemType.PLAYER) {
                     System.out.print("@");
-
+                } else if (cell.getItem().getType() == ItemType.BOXGOAL) {
+                    System.out.print("+");
+                } else if (cell.getItem().getType() == ItemType.SOKOGOAL) {
+                    System.out.print("*");
                 }
             }
             System.out.println("");
@@ -33,11 +36,18 @@ public class viewwwww {
     }
 
     public void displayHelp() {
-        System.out.println("move:");
+        System.out.println("move: use zqsd to move");
     }
 
     public String askCommand() {
         return in.nextLine();
     }
 
+    public void displayQuit() {
+        System.out.println("Thanks for playing");
+    }
+
+    public void initialize() {
+        System.out.println("Welcome in Sokoban !");
+    }
 }

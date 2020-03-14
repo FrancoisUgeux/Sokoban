@@ -12,7 +12,7 @@ public class Player extends Item {
     private final int nbMoves;
 
     public Player(int nbMoves) {
-        super(ItemType.PLAYER, true, false);
+        super(ItemType.PLAYER, true);
         this.nbMoves = nbMoves;
     }
 

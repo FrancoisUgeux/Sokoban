@@ -1,5 +1,5 @@
 
-package esi.atl.g43335.sokoban.Model.items;
+package esi.atl.g43335.sokoban.model.items;
 
 import esi.atl.g43335.sokoban.model.Item;
 import esi.atl.g43335.sokoban.model.ItemType;
@@ -11,7 +11,7 @@ import esi.atl.g43335.sokoban.model.ItemType;
 public class BoxGoal extends Item{
 
     public BoxGoal() {
-        super(ItemType.BOXGOAL, true, false);
+        super(ItemType.BOXGOAL, true);
     }
 
 }

@@ -1,5 +1,6 @@
 package esi.atl.g43335.sokoban.model;
 
+import esi.atl.g43335.sokoban.model.items.*;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -9,7 +10,7 @@ import java.util.Stack;
  */
 public class Game {
 
-    private final int nbMoves;
+    private int nbMoves;
     private Maze maze;
     private int currentLevel;
     private Position sokoPos;
@@ -67,22 +68,70 @@ public class Game {
 
     public void move(Direction dir) {
         Position target = sokoPos.next(dir);
-        if (maze.isFree(target)) {
+        if (maze.isFree(target) && !maze.isSokoGoal(sokoPos)) {
             maze.put(maze.getCell(sokoPos).getItem(), target);
             maze.remove(sokoPos);
+            sokoPos = target;
+            nbMoves++;
+        } else if (maze.isFree(target) && maze.isSokoGoal(sokoPos)) {
+            maze.put(new Player(nbMoves), target);
+            maze.remove(sokoPos);
+            maze.put(new Goal(), sokoPos);
+            sokoPos = target;
+            nbMoves++;
         } else if (maze.isBox(target)) {
-            if (canMove(target)) {
-                maze.put(maze.getCell(target).getItem(), target.next(dir));
-                maze.remove(target);
-                maze.put(maze.getCell(sokoPos).getItem(), target);
-                maze.remove(sokoPos);
-            }
+            moveBox(sokoPos, target, dir);
+        } else if (maze.isBoxGoal(target)) {
+            moveBoxGoal(sokoPos, target, dir);
+        } else if (maze.isGoal(target)) {
+            maze.put(new SokoGoal(), target);
+            maze.remove(sokoPos);
+            sokoPos = target;
+            nbMoves++;
         }
-        sokoPos = target;
+
     }
 
-    public boolean canMove(Position pos) {
-        return (maze.isFree(pos) || maze.isGoal(pos));
+    public boolean canMove(Position pos, Direction dir) {
+        return (maze.isFree(pos.next(dir)) || maze.isGoal(pos.next(dir)));
+    }
+
+    public void moveBoxGoal(Position start, Position target, Direction dir) {
+        if (canMove(target, dir)) {
+            if (maze.isGoal(target.next(dir))) {
+                maze.put(new SokoGoal(), target.next(dir));
+                maze.remove(target);
+                maze.put(maze.getCell(start).getItem(), target);
+                sokoPos = target;
+                nbMoves++;
+            } else if (maze.isFree(target.next(dir))) {
+                maze.put(new Box(), target.next(dir));
+                maze.remove(target);
+                maze.put(new SokoGoal(), target);
+                sokoPos = target;
+                nbMoves++;
+            }
+            maze.remove(start);
+        }
+
+    }
+
+    public void moveBox(Position start, Position target, Direction dir) {
+        if (canMove(target, dir)) {
+            if (maze.isGoal(target.next(dir))) {
+                maze.put(new BoxGoal(), target.next(dir));
+                maze.remove(target);
+                sokoPos = target;
+                nbMoves++;
+            } else {
+                maze.put(maze.getCell(target).getItem(), target.next(dir));
+                maze.remove(target);
+                sokoPos = target;
+                nbMoves++;
+            }
+            maze.put(maze.getCell(start).getItem(), target);
+            maze.remove(start);
+        }
     }
 
     public void undo() {
@@ -91,7 +140,7 @@ public class Game {
     }
 
     public void redo() {
-        redoStack.pop().execute();
         undoStack.push(redoStack.peek());
+        redoStack.pop().execute();
     }
 }

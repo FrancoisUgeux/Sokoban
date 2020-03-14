@@ -70,7 +70,7 @@ public class Maze {
                 line = reader.readLine();
             }
         } catch (IOException exc) {
-            System.out.println("c 2 la mert");
+            System.out.println("error while creating the maze");
         }
     }
 
@@ -96,15 +96,6 @@ public class Maze {
         return cells[p.getRow()][p.getColumn()].isFree();
     }
 
-    boolean isGoal(Position p) {
-        for (Position goal : goals) {
-            if (p.equals(goal)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public Cell[][] getCells() { // a vérifier ???
         Cell[][] copyCells = cells;
         return copyCells;
@@ -128,5 +119,20 @@ public class Maze {
     public boolean isBox(Position pos) {
         return (cells[pos.getRow()][pos.getColumn()].
                 getItem().getType() == ItemType.BOX);
+    }
+
+    boolean isGoal(Position pos) {
+        return (cells[pos.getRow()][pos.getColumn()].
+                getItem().getType() == ItemType.GOAL);
+    }
+
+    public boolean isBoxGoal(Position pos) {
+        return (cells[pos.getRow()][pos.getColumn()].
+                getItem().getType() == ItemType.BOXGOAL);
+    }
+
+    public boolean isSokoGoal(Position pos) {
+        return (cells[pos.getRow()][pos.getColumn()].
+                getItem().getType() == ItemType.SOKOGOAL);
     }
 }

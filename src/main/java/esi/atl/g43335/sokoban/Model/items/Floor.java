@@ -10,7 +10,7 @@ import esi.atl.g43335.sokoban.model.ItemType;
 public class Floor extends Item{
     
     public Floor() {
-        super(ItemType.FLOOR, false, true);
+        super(ItemType.FLOOR, false);
     }
     
 }

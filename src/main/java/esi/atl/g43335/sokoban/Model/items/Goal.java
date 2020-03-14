@@ -11,7 +11,7 @@ import esi.atl.g43335.sokoban.model.ItemType;
 public class Goal extends Item{
 
     public Goal() {
-        super(ItemType.GOAL, false, true);
+        super(ItemType.GOAL, false);
     }
 
 }

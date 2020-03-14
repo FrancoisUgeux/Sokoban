@@ -27,9 +27,9 @@ public class Cell {
     }
 
     public void put(Item item) {
-        if (!this.item.isCrosseable()) {
-            throw new IllegalStateException("Must be a crosseable item(goal,floor)");
-        }
+//        if (!this.item.isCrosseable()) {
+//            throw new IllegalStateException("Must be a crosseable item(goal,floor)");
+//        }
         this.item = item;
     }
 

@@ -7,9 +7,9 @@ import esi.atl.g43335.sokoban.model.ItemType;
  *
  * @author franc
  */
-public class Wall extends Item{
+public class Wall extends Item {
 
     public Wall() {
-        super(ItemType.WALL, false, false);
+        super(ItemType.WALL, false);
     }
 }
