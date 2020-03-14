@@ -13,13 +13,13 @@ import java.util.ArrayList;
  */
 public class Maze {
 
-    private static final int ROWS = 40;
-    private static final int COLUMNS = 40;
+    private static final int ROWS = 10;
+    private static final int COLUMNS = 10;
     private final Cell[][] cells;
     private Game game;
     private Position start;
-    private ArrayList<Position> boxes;
-    private ArrayList<Position> goals;
+    private ArrayList<Position> boxes = new ArrayList();
+    private ArrayList<Position> goals = new ArrayList();
     private String level //a supprimer après gestion du xsb
             = "    ######\n"
             + "    ##   #\n"
@@ -41,15 +41,14 @@ public class Maze {
             }
         }
         //game.getCurrentLevel()
-        levelBuilder(); //doit appeler le fichier xsb
+        levelBuilder("levelTest"); //doit appeler le fichier xsb
     }
 
-    private void levelBuilder() {
+    private void levelBuilder(String level) {
         int currentLine = 0;
-        try ( BufferedReader reader = new BufferedReader(new FileReader(level1))) {
+        try ( BufferedReader reader = new BufferedReader(new FileReader(level))) {
             String line = reader.readLine();
             while (line != null) {
-                line = reader.readLine();
                 for (int i = 0; i < line.length(); i++) {
                     char item = line.charAt(i);
                     switch (item) {
@@ -57,10 +56,9 @@ public class Maze {
                             cells[currentLine][i] = new Cell(new Wall());
                             break;
                         case '$':
-                            Position posB = new Position(currentLine,i);
                             Box b = new Box();
                             cells[currentLine][i] = new Cell(b);
-                            boxes.add(posB);
+                            boxes.add(new Position(currentLine,i));
                             break;
                         case '.':
                             Position posG = new Position(currentLine, i);
@@ -82,6 +80,7 @@ public class Maze {
                     cells[currentLine][i] = new Cell(new Floor());
                 }
                 currentLine++;
+                line = reader.readLine();
             }
         } catch (IOException exc) {
             System.out.println("c 2 la mert");

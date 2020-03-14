@@ -6,8 +6,8 @@ package esi.atl.g43335.sokoban.model;
  */
 public class Position {
 
-    private final int row;
-    private final int column;
+    private int row;
+    private int column;
 
     public Position(int row, int column) {
         this.row = row;
