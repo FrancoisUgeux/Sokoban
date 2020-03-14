@@ -1,5 +1,6 @@
 package esi.atl.g43335.sokoban.model;
 
+import esi.atl.g43335.sokoban.Model.commands.moveCommand;
 import esi.atl.g43335.sokoban.model.items.*;
 import java.util.ArrayList;
 import java.util.Stack;
@@ -69,10 +70,12 @@ public class Game {
     public void move(Direction dir) {
         Position target = sokoPos.next(dir);
         if (maze.isFree(target) && !maze.isSokoGoal(sokoPos)) {
-            maze.put(maze.getCell(sokoPos).getItem(), target);
-            maze.remove(sokoPos);
+            Item item = maze.getCell(sokoPos).getItem();
+            Commands command = new moveCommand(maze, sokoPos, target, item);
+            command.execute();
             sokoPos = target;
             nbMoves++;
+            undoStack.push(command);
         } else if (maze.isFree(target) && maze.isSokoGoal(sokoPos)) {
             maze.put(new Player(nbMoves), target);
             maze.remove(sokoPos);
@@ -89,7 +92,6 @@ public class Game {
             sokoPos = target;
             nbMoves++;
         }
-
     }
 
     public boolean canMove(Position pos, Direction dir) {
