@@ -1,6 +1,5 @@
 package esi.atl.g43335.sokoban.model;
 
-import esi.atl.g43335.sokoban.model.items.Box;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -13,6 +12,7 @@ public class Game {
     private final int nbMoves;
     private Maze maze;
     private int currentLevel;
+    private Position sokoPos;
     private final Stack<Commands> undoStack;
     private final Stack<Commands> redoStack;
 
@@ -32,6 +32,7 @@ public class Game {
 
     public void start(int level) {
         maze = new Maze();
+        sokoPos = maze.getStart();
     }
 
     public String getCurrentLevel() {
@@ -64,8 +65,24 @@ public class Game {
         currentLevel++;
     }
 
-    public void move(Direction next) {
+    public void move(Direction dir) {
+        Position target = sokoPos.next(dir);
+        if (maze.isFree(target)) {
+            maze.put(maze.getCell(sokoPos).getItem(), target);
+            maze.remove(sokoPos);
+        } else if (maze.isBox(target)) {
+            if (canMove(target)) {
+                maze.put(maze.getCell(target).getItem(), target.next(dir));
+                maze.remove(target);
+                maze.put(maze.getCell(sokoPos).getItem(), target);
+                maze.remove(sokoPos);
+            }
+        }
+        sokoPos = target;
+    }
 
+    public boolean canMove(Position pos) {
+        return (maze.isFree(pos) || maze.isGoal(pos));
     }
 
     public void undo() {
@@ -75,5 +92,6 @@ public class Game {
 
     public void redo() {
         redoStack.pop().execute();
+        undoStack.push(redoStack.peek());
     }
 }

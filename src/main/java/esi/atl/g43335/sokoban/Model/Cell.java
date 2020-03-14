@@ -13,27 +13,27 @@ public class Cell {
     public Cell(Item item) {
         this.item = item;
     }
-    
-    public Cell(){
+
+    public Cell() {
         this.item = new Floor();
     }
 
     public Item getItem() {
         return item;
     }
-    
-    public boolean isFree(){
-        return item == new Floor();
+
+    public boolean isFree() {
+        return item.getType() == ItemType.FLOOR;
     }
-    
-    public void put(Item item){
-        if(!this.item.isCrosseable()){
+
+    public void put(Item item) {
+        if (!this.item.isCrosseable()) {
             throw new IllegalStateException("Must be a crosseable item(goal,floor)");
         }
         this.item = item;
     }
-    
-    public void remove(){
+
+    public void remove() {
         item = new Floor();
     }
 }

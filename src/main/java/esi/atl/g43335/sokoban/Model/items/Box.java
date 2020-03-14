@@ -10,6 +10,6 @@ import esi.atl.g43335.sokoban.model.ItemType;
 public class Box extends Item {
 
     public Box() {
-        super(ItemType.GOAL, true, false);
+        super(ItemType.BOX, true, false);
     }
 }

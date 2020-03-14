@@ -20,18 +20,6 @@ public class Maze {
     private Position start;
     private ArrayList<Position> boxes = new ArrayList();
     private ArrayList<Position> goals = new ArrayList();
-    private String level //a supprimer après gestion du xsb
-            = "    ######\n"
-            + "    ##   #\n"
-            + "    ##$  #\n"
-            + "  ####  $##\n"
-            + "  ##  $ $ #\n"
-            + "#### # ## #   ######\n"
-            + "##   # ## #####  ..#\n"
-            + "## $  $          ..#\n"
-            + "###### ### #@##  ..#\n"
-            + "    ##     #########\n"
-            + "    ########\n";
 
     public Maze() {
         cells = new Cell[ROWS][COLUMNS];
@@ -41,7 +29,7 @@ public class Maze {
             }
         }
         //game.getCurrentLevel()
-        levelBuilder("levelTest"); //doit appeler le fichier xsb
+        levelBuilder("levelTest");
     }
 
     private void levelBuilder(String level) {
@@ -56,9 +44,8 @@ public class Maze {
                             cells[currentLine][i] = new Cell(new Wall());
                             break;
                         case '$':
-                            Box b = new Box();
-                            cells[currentLine][i] = new Cell(b);
-                            boxes.add(new Position(currentLine,i));
+                            cells[currentLine][i] = new Cell(new Box());
+                            boxes.add(new Position(currentLine, i));
                             break;
                         case '.':
                             Position posG = new Position(currentLine, i);
@@ -122,6 +109,24 @@ public class Maze {
         Cell[][] copyCells = cells;
         return copyCells;
     }
-    
-    
+
+    public Position getStart() {
+        return start;
+    }
+
+    public void put(Item item, Position pos) {
+        if (!isInside(pos)) {
+            throw new IllegalArgumentException("out of the maze");
+        }
+        cells[pos.getRow()][pos.getColumn()].put(item);
+    }
+
+    public void remove(Position pos) {
+        cells[pos.getRow()][pos.getColumn()].remove();
+    }
+
+    public boolean isBox(Position pos) {
+        return (cells[pos.getRow()][pos.getColumn()].
+                getItem().getType() == ItemType.BOX);
+    }
 }
