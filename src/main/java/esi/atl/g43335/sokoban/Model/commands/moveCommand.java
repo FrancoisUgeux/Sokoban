@@ -28,11 +28,11 @@ public class moveCommand implements Commands {
 
     /**
      *
-     * @param maze
-     * @param start
-     * @param target
-     * @param item
-     * @param nbMoves
+     * @param maze The current level.
+     * @param start The position of soko before the move.
+     * @param target The place soko want to move on.
+     * @param item Soko.
+     * @param nbMoves The number of moves already made by soko.
      */
     public moveCommand(Maze maze, Position start, Position target,
             Item item, int nbMoves) {
@@ -44,6 +44,11 @@ public class moveCommand implements Commands {
         saveStart = start;
     }
 
+    /**
+     * execute the move command without box. depending on: player move from
+     * floor to goal. player moving from floor to floor. player moving from goal
+     * to floor.
+     */
     @Override
     public void execute() {
 
@@ -63,25 +68,26 @@ public class moveCommand implements Commands {
         }
     }
 
+    /**
+     * used to undo the last move not using a box.
+     */
     @Override
     public void unexecute() {
         int last = option.size() - 1;
         switch (option.get(last)) {
             case 0:
-                maze.put(item, start);
+                maze.put(item, saveStart);
                 maze.remove(target);
-                option.remove(last);
                 break;
             case 1:
-                maze.put(new SokoGoal(), start);
+                maze.put(new SokoGoal(), saveStart);
                 maze.remove(target);
-                option.remove(last);
                 break;
             case 2:
-                maze.put(item, start);
+                maze.put(item, saveStart);
                 maze.put(new Goal(), target);
-                option.remove(last);
         }
+        option.remove(last);
         start = saveStart;
         nbMoves--;
     }

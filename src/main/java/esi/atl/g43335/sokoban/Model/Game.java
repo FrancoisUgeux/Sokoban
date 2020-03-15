@@ -7,10 +7,11 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 /**
+ * This class deal with the game's mechanics
  *
  * @author franc
  */
-public class Game {
+public class Game implements Model {
 
     private int nbMoves;
     private Maze maze;
@@ -19,29 +20,39 @@ public class Game {
     private final Stack<Commands> undoStack;
     private final Stack<Commands> redoStack;
 
+    /**
+     *
+     * @param nbMoves is the number of moves made by Soko
+     */
     public Game(int nbMoves) {
         this.nbMoves = nbMoves;
         undoStack = new Stack<>();
         redoStack = new Stack<>();
     }
 
+    @Override
     public int getNbMoves() {
         return nbMoves;
     }
 
+    @Override
     public Maze getMaze() {
         return maze;
     }
 
+    @Override
     public void start(int level) {
         maze = new Maze();
         sokoPos = maze.getStart();
     }
 
+    @Override
     public String getCurrentLevel() {
         return " ";
     }
 
+
+    @Override
     public boolean isOver() {
         ArrayList<Position> boxes = maze.getBoxes();
         for (Position box : boxes) {
@@ -52,22 +63,27 @@ public class Game {
         return true;
     }
 
+    @Override
     public boolean isGoal(Position p) {
         return maze.isGoal(p);
     }
 
+    @Override
     public void giveUp() {
 
     }
 
+    @Override
     public void restart() {
 
     }
 
+    @Override
     public void nextLevel() {
         currentLevel++;
     }
 
+    @Override
     public void move(Direction dir) {
         Position target = sokoPos.next(dir);
         Item item = maze.getCell(sokoPos).getItem();
@@ -86,53 +102,26 @@ public class Game {
         }
     }
 
+    /**
+     * Check if the item on a position can move on the cell in the given
+     * direction.
+     *
+     * @param pos is the starting position
+     * @param dir the direction the item should move
+     * @return true if the item can be placed in that direction.
+     */
+    @Override
     public boolean canMove(Position pos, Direction dir) {
         return (maze.isFree(pos.next(dir)) || maze.isGoal(pos.next(dir)));
     }
 
-    public void moveBoxGoal(Position start, Position target, Direction dir) {
-        if (canMove(target, dir)) {
-            if (maze.isGoal(target.next(dir))) {
-                maze.put(new SokoGoal(), target.next(dir));
-                maze.remove(target);
-                maze.put(maze.getCell(start).getItem(), target);
-                sokoPos = target;
-                nbMoves++;
-            } else if (maze.isFree(target.next(dir))) {
-                maze.put(new Box(), target.next(dir));
-                maze.remove(target);
-                maze.put(new SokoGoal(), target);
-                sokoPos = target;
-                nbMoves++;
-            }
-            maze.remove(start);
-        }
-
-    }
-
-    public void moveBox(Position start, Position target, Direction dir) {
-        if (canMove(target, dir)) {
-            if (maze.isGoal(target.next(dir))) {
-                maze.put(new BoxGoal(), target.next(dir));
-                maze.remove(target);
-                sokoPos = target;
-                nbMoves++;
-            } else {
-                maze.put(maze.getCell(target).getItem(), target.next(dir));
-                maze.remove(target);
-                sokoPos = target;
-                nbMoves++;
-            }
-            maze.put(maze.getCell(start).getItem(), target);
-            maze.remove(start);
-        }
-    }
-
+    @Override
     public void undo() {
         redoStack.push(undoStack.peek());
         undoStack.pop().unexecute();
     }
 
+    @Override
     public void redo() {
         undoStack.push(redoStack.peek());
         redoStack.pop().execute();

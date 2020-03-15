@@ -5,6 +5,7 @@ package esi.atl.g43335.sokoban.model;
  * @author franc
  */
 public enum Direction {
+
     UP(-1, 0),
     DOWN(1, 0),
     LEFT(0, -1),

@@ -6,7 +6,13 @@ package esi.atl.g43335.sokoban.model;
  */
 public interface Commands {
 
+    /**
+     * Execute a commands.
+     */
     void execute();
 
+    /**
+     * Undo the last command.
+     */
     void unexecute();
 }

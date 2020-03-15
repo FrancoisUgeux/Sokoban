@@ -9,6 +9,9 @@ import esi.atl.g43335.sokoban.model.ItemType;
  */
 public class Wall extends Item {
 
+    /**
+     * Create a wall, a wall can't move ==> isMoveable initialized at false.
+     */
     public Wall() {
         super(ItemType.WALL, false);
     }
