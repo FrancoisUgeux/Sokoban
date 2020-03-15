@@ -1,7 +1,6 @@
 package esi.atl.g43335.sokoban.model;
 
-import esi.atl.g43335.sokoban.model.items.Player;
-import esi.atl.g43335.sokoban.model.items.Wall;
+import esi.atl.g43335.sokoban.model.items.*;
 import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -164,20 +163,60 @@ public class MazeTest {
     public void testGetStart() {
         System.out.println("getStart");
         Maze instance = new Maze();
-        Position expResult = null;
+        instance.chooseLevel(0);
+        Position expResult = new Position(3, 2);
         Position result = instance.getStart();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
     }
 
     @Test
-    public void testPut() {
-        System.out.println("put");
-        Item item = null;
-        Position pos = null;
+    public void testPutBox() {
+        System.out.println("putBox");
+        Item item = new Box();
+        Position pos = new Position(0, 0);
         Maze instance = new Maze();
         instance.put(item, pos);
-        fail("The test case is a prototype.");
+        assertTrue(instance.getCell(pos).getItem().getType() == new Box().getType());
+    }
+
+    @Test
+    public void testPutGoal() {
+        System.out.println("putGoal");
+        Item item = new Goal();
+        Position pos = new Position(0, 0);
+        Maze instance = new Maze();
+        instance.put(item, pos);
+        assertTrue(instance.getCell(pos).getItem().getType() == new Goal().getType());
+    }
+
+    @Test
+    public void testPutPlayer() {
+        System.out.println("putPlayer");
+        Item item = new Player(0);
+        Position pos = new Position(0, 0);
+        Maze instance = new Maze();
+        instance.put(item, pos);
+        assertTrue(instance.getCell(pos).getItem().getType() == new Player(0).getType());
+    }
+
+    @Test
+    public void testPutSokoGoal() {
+        System.out.println("putSokoGoal");
+        Item item = new SokoGoal();
+        Position pos = new Position(0, 0);
+        Maze instance = new Maze();
+        instance.put(item, pos);
+        assertTrue(instance.getCell(pos).getItem().getType() == new SokoGoal().getType());
+    }
+
+    @Test
+    public void testPutBoxGoal() {
+        System.out.println("putBoxGoal");
+        Item item = new BoxGoal();
+        Position pos = new Position(0, 0);
+        Maze instance = new Maze();
+        instance.put(item, pos);
+        assertTrue(instance.getCell(pos).getItem().getType() == new BoxGoal().getType());
     }
 
     @Test
