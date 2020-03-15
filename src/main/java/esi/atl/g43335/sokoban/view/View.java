@@ -38,7 +38,7 @@ public class View {
     public void displayHelp() {
         System.out.println("zqsd: use zqsd to move");
         System.out.println("undo/redo: undo and redo your last command");
-        System.out.println("restart: restart your current move");
+        System.out.println("restart: restart your current level");
         System.out.println("next: go to the next level");
     }
 
