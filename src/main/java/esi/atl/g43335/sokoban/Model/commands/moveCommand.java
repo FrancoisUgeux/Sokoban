@@ -1,4 +1,4 @@
-package esi.atl.g43335.sokoban.Model.commands;
+package esi.atl.g43335.sokoban.model.commands;
 
 import esi.atl.g43335.sokoban.model.Commands;
 import esi.atl.g43335.sokoban.model.Item;
@@ -58,13 +58,16 @@ public class moveCommand implements Commands {
             option.add(0);
         } else if (maze.isFree(target) && maze.isSokoGoal(start)) {
             maze.put(new Player(nbMoves), target);
-            maze.remove(start);
             maze.put(new Goal(), start);
-            option.add(0);
+            option.add(1);
+        } else if (maze.isGoal(target) && maze.isSokoGoal(start)) {
+            maze.put(new SokoGoal(), target);
+            maze.put(new Goal(), start);
+            option.add(2);
         } else {
             maze.put(new SokoGoal(), target);
             maze.remove(start);
-            option.add(0);
+            option.add(3);
         }
     }
 
@@ -84,8 +87,12 @@ public class moveCommand implements Commands {
                 maze.remove(target);
                 break;
             case 2:
+                maze.put(new SokoGoal(), saveStart);
+                maze.put(new Goal(), target);
+            case 3:
                 maze.put(item, saveStart);
                 maze.put(new Goal(), target);
+                break;
         }
         option.remove(last);
         start = saveStart;

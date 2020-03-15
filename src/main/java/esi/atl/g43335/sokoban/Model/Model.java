@@ -28,7 +28,7 @@ public interface Model {
      *
      * @return the current level.
      */
-    String getCurrentLevel();
+    String getCurrentLevel(int level);
 
     /**
      *

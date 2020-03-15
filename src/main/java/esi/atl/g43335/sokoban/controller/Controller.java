@@ -18,14 +18,14 @@ public class Controller {
         this.view = view;
     }
 
-    public void initialize() {
-        game.start(0);
-    }
-
     public void start() {
+        String[] arrayOfArgs;
         view.initialize();
         view.displayHelp();
-        String[] arrayOfArgs;
+        view.displayLevel();
+        arrayOfArgs = view.askCommand().split(" ");
+        game.start(Integer.parseInt(arrayOfArgs[0]));
+        view.displayMaze(game.getMaze().getCells());
         do {
             arrayOfArgs = view.askCommand().split(" ");
             commands(arrayOfArgs);
@@ -49,24 +49,20 @@ public class Controller {
                 break;
             case "help":
                 view.displayHelp();
+                break;
+            case "undo":
+                game.undo();
+                break;
+            case "redo":
+                game.redo();
+                break;
+            case "restart":
+                game.restart();
+                break;
+            case "next":
+                game.nextLevel();
+                break;
         }
         view.displayMaze(game.getMaze().getCells());
     }
-
-//    private void moveItem(String[] arrayOfArgs) {
-//        switch (arrayOfArgs[1]) {
-//            case "z":
-//                game.move(Direction.UP);
-//                break;
-//            case "s":
-//                game.move(Direction.DOWN);
-//                break;
-//            case "q":
-//                game.move(Direction.LEFT);
-//                break;
-//            case "d":
-//                game.move(Direction.RIGHT);
-//        }
-//        view.displayMaze(game.getMaze().getCells());
-//    }
 }

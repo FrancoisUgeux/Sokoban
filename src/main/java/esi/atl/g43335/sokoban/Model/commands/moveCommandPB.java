@@ -1,4 +1,4 @@
-package esi.atl.g43335.sokoban.Model.commands;
+package esi.atl.g43335.sokoban.model.commands;
 
 import esi.atl.g43335.sokoban.model.*;
 import esi.atl.g43335.sokoban.model.items.*;

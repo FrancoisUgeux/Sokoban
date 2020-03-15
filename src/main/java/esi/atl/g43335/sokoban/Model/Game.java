@@ -1,7 +1,7 @@
 package esi.atl.g43335.sokoban.model;
 
-import esi.atl.g43335.sokoban.Model.commands.moveCommand;
-import esi.atl.g43335.sokoban.Model.commands.moveCommandPB;
+import esi.atl.g43335.sokoban.model.commands.moveCommand;
+import esi.atl.g43335.sokoban.model.commands.moveCommandPB;
 import esi.atl.g43335.sokoban.model.items.*;
 import java.util.ArrayList;
 import java.util.Stack;
@@ -43,14 +43,23 @@ public class Game implements Model {
     @Override
     public void start(int level) {
         maze = new Maze();
+        maze.chooseLevel(level);
+        currentLevel = level;
         sokoPos = maze.getStart();
     }
 
     @Override
-    public String getCurrentLevel() {
-        return " ";
+    public String getCurrentLevel(int level) {
+        switch (level) {
+            case 0:
+                return "levelTest";
+            case 1:
+                return "level1";
+            default:
+                System.out.println("Wrong level number, here is the test level");
+                return "levelTest";
+        }
     }
-
 
     @Override
     public boolean isOver() {
@@ -75,12 +84,13 @@ public class Game implements Model {
 
     @Override
     public void restart() {
-
+        start(currentLevel);
     }
 
     @Override
     public void nextLevel() {
         currentLevel++;
+        start(currentLevel);
     }
 
     @Override

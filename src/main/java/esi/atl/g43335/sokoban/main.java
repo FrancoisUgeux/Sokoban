@@ -20,8 +20,6 @@ public class main {
         Controller controller = new Controller(game, view);
         Maze maze = new Maze();
         view.displayMaze(maze.getCells());
-        game.start(0);
-        controller.initialize();
         controller.start();
     }
 

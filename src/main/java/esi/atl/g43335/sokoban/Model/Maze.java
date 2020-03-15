@@ -15,8 +15,8 @@ import java.util.ArrayList;
  */
 public class Maze {
 
-    private static final int ROWS = 10;
-    private static final int COLUMNS = 10;
+    private static final int ROWS = 40;
+    private static final int COLUMNS = 40;
     private final Cell[][] cells;
     private Game game;
     private Position start;
@@ -34,8 +34,19 @@ public class Maze {
                 cells[i][j] = new Cell();
             }
         }
-        //game.getCurrentLevel()
-        levelBuilder("levelTest");
+    }
+
+    public void chooseLevel(int level) {
+        switch (level) {
+            case 0:
+                levelBuilder("levelTest");
+                break;
+            case 1:
+                levelBuilder("level1");
+                break;
+            default:
+                levelBuilder("levelTest");
+        }
     }
 
     private void levelBuilder(String level) {
@@ -98,6 +109,10 @@ public class Maze {
      */
     public ArrayList<Position> getBoxes() {
         return boxes;
+    }
+
+    public void setStart(Position start) {
+        this.start = start;
     }
 
     /**

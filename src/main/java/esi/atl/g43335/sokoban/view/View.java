@@ -36,7 +36,10 @@ public class View {
     }
 
     public void displayHelp() {
-        System.out.println("move: use zqsd to move");
+        System.out.println("zqsd: use zqsd to move");
+        System.out.println("undo/redo: undo and redo your last command");
+        System.out.println("restart: restart your current move");
+        System.out.println("next: go to the next level");
     }
 
     public String askCommand() {
@@ -49,5 +52,9 @@ public class View {
 
     public void initialize() {
         System.out.println("Welcome in Sokoban !");
+    }
+
+    public void displayLevel() {
+        System.out.println("Choose your level ! insert a number from 0 to 1");
     }
 }
