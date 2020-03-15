@@ -57,4 +57,8 @@ public class View {
     public void displayLevel() {
         System.out.println("Choose your level ! insert a number from 0 to 1");
     }
+
+    public void displayNbMoves(int nbMoves) {
+        System.out.println("you made " + nbMoves + " move(s)");
+    }
 }

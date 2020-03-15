@@ -64,5 +64,6 @@ public class Controller {
                 break;
         }
         view.displayMaze(game.getMaze().getCells());
+        view.displayNbMoves(game.getNbMoves());
     }
 }
