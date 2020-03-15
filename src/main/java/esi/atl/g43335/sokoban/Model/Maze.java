@@ -104,6 +104,8 @@ public class Maze {
     public Position getStart() {
         return start;
     }
+    
+    
 
     public void put(Item item, Position pos) {
         if (!isInside(pos)) {
@@ -121,7 +123,7 @@ public class Maze {
                 getItem().getType() == ItemType.BOX);
     }
 
-    boolean isGoal(Position pos) {
+    public boolean isGoal(Position pos) {
         return (cells[pos.getRow()][pos.getColumn()].
                 getItem().getType() == ItemType.GOAL);
     }

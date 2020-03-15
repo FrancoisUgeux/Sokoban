@@ -1,6 +1,7 @@
 package esi.atl.g43335.sokoban.model;
 
 import esi.atl.g43335.sokoban.Model.commands.moveCommand;
+import esi.atl.g43335.sokoban.Model.commands.moveCommandPB;
 import esi.atl.g43335.sokoban.model.items.*;
 import java.util.ArrayList;
 import java.util.Stack;
@@ -69,26 +70,17 @@ public class Game {
 
     public void move(Direction dir) {
         Position target = sokoPos.next(dir);
-        if (maze.isFree(target) && !maze.isSokoGoal(sokoPos)) {
-            Item item = maze.getCell(sokoPos).getItem();
-            Commands command = new moveCommand(maze, sokoPos, target, item);
+        Item item = maze.getCell(sokoPos).getItem();
+        if (maze.isFree(target) || maze.isGoal(target)) {
+            Commands command = new moveCommand(maze, sokoPos, target, item, nbMoves);
             command.execute();
-            sokoPos = target;
-            nbMoves++;
             undoStack.push(command);
-        } else if (maze.isFree(target) && maze.isSokoGoal(sokoPos)) {
-            maze.put(new Player(nbMoves), target);
-            maze.remove(sokoPos);
-            maze.put(new Goal(), sokoPos);
-            sokoPos = target;
+            sokoPos = target;       //setStart dans maze ?
             nbMoves++;
-        } else if (maze.isBox(target)) {
-            moveBox(sokoPos, target, dir);
-        } else if (maze.isBoxGoal(target)) {
-            moveBoxGoal(sokoPos, target, dir);
-        } else if (maze.isGoal(target)) {
-            maze.put(new SokoGoal(), target);
-            maze.remove(sokoPos);
+        } else if (canMove(target, dir)) {
+            Commands command = new moveCommandPB(maze, sokoPos, target, item, dir, nbMoves);
+            command.execute();
+            undoStack.push(command);
             sokoPos = target;
             nbMoves++;
         }
