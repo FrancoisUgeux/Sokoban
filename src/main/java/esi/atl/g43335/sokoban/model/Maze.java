@@ -55,14 +55,14 @@ public class Maze {
     }
 
     private void levelBuilder(String level) {
-        int currentLine = 0;
+        int currentLine = 0; //@srv: lire/décoeder  le fichier dans une classe dédiée: XsbReader.
         try ( BufferedReader reader = new BufferedReader(new FileReader(level))) {
             String line = reader.readLine();
             while (line != null) {
                 for (int i = 0; i < line.length(); i++) {
                     char item = line.charAt(i);
                     switch (item) {
-                        case '#':
+                        case '#': //@srv utiliser des constantes.
                             cells[currentLine][i] = new Cell(new Wall());
                             break;
                         case '$':

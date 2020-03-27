@@ -18,7 +18,7 @@ public class View {
                 if (cell.isFree()) {
                     System.out.print(" ");
                 } else if (cell.getItem().getType() == ItemType.BOX) {
-                    System.out.print("$");
+                    System.out.print("$"); //@srv utiliser des constantes.
                 } else if (cell.getItem().getType() == ItemType.GOAL) {
                     System.out.print(".");
                 } else if (cell.getItem().getType() == ItemType.WALL) {

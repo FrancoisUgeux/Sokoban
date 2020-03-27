@@ -35,7 +35,7 @@ public class Controller {
 
     public void commands(String[] arrayOfArgs) {
         switch (arrayOfArgs[0]) {
-            case "z":
+            case "z": //@srv utiliser des constantes.
                 game.move(Direction.UP);
                 break;
             case "s":

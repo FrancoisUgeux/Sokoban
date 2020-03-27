@@ -4,7 +4,7 @@ package esi.atl.g43335.sokoban.model;
  *
  * @author franc
  */
-public interface Commands {
+public interface Command {
 
     /**
      * Execute a commands.

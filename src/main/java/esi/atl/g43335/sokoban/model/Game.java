@@ -17,8 +17,8 @@ public class Game implements Model {
     private Maze maze;
     private int currentLevel;
     private Position sokoPos;
-    private final Stack<Commands> undoStack;
-    private final Stack<Commands> redoStack;
+    private final Stack<Command> undoStack;
+    private final Stack<Command> redoStack;
 
     /**
      *
@@ -111,7 +111,7 @@ public class Game implements Model {
 
     @Override
     public void giveUp() {
-
+//@srv todo
     }
 
     @Override
@@ -132,7 +132,7 @@ public class Game implements Model {
         Position target = sokoPos.next(dir);
         Item item = maze.getCell(sokoPos).getItem();
         if (maze.isFree(target) || maze.isGoal(target)) {
-            Commands command = new moveCommand(maze, sokoPos, target, item, nbMoves);
+            Command command = new moveCommand(maze, sokoPos, target, item, nbMoves);
             command.execute();
             undoStack.push(command);
             redoStack.clear();
@@ -140,7 +140,7 @@ public class Game implements Model {
             nbMoves++;
         } else if (canMove(target, dir) && maze.getCell(target).getItem().
                 getType() != ItemType.WALL) {
-            Commands command = new moveCommandPB(maze, sokoPos, target, item, dir, nbMoves);
+            Command command = new moveCommandPB(maze, sokoPos, target, item, dir, nbMoves);
             command.execute();
             undoStack.push(command);
             redoStack.clear();
