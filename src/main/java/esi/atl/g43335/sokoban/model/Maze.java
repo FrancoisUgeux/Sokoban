@@ -42,58 +42,40 @@ public class Maze {
     }
 
     public void chooseLevel(int level) {
+        XsbReader reader = new XsbReader(this);
         switch (level) {
             case 0:
-                levelBuilder("levelTest");
+                reader.levelBuilder("levelTest");
                 break;
             case 1:
-                levelBuilder("level1");
+                reader.levelBuilder("level1");
                 break;
             default:
-                levelBuilder("levelTest");
+                reader.levelBuilder("levelTest");
         }
     }
 
-    private void levelBuilder(String level) {
-        int currentLine = 0;
-        try ( BufferedReader reader = new BufferedReader(new FileReader(level))) {
-            String line = reader.readLine();
-            while (line != null) {
-                for (int i = 0; i < line.length(); i++) {
-                    char item = line.charAt(i);
-                    switch (item) {
-                        case '#':
-                            cells[currentLine][i] = new Cell(new Wall());
-                            break;
-                        case '$':
-                            cells[currentLine][i] = new Cell(new Box());
-                            boxes.add(new Position(currentLine, i));
-                            break;
-                        case '.':
-                            Position posG = new Position(currentLine, i);
-                            cells[currentLine][i] = new Cell(new Goal());
-                            goals.add(posG);
-                            break;
-                        case '@':
-                            start = new Position(currentLine, i);
-                            cells[currentLine][i] = new Cell(new Player(0));
-                            break;
-                        case ' ':
-                            cells[currentLine][i] = new Cell(new Floor());
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                for (int i = Math.min(COLUMNS, line.length()); i < COLUMNS; i++) {
-                    cells[currentLine][i] = new Cell(new Floor());
-                }
-                currentLine++;
-                line = reader.readLine();
-            }
-        } catch (IOException exc) {
-            System.out.println("error while creating the maze");
-        }
+    public void addWall(Position pos) {
+        cells[pos.getRow()][pos.getColumn()] = new Cell(new Wall());
+    }
+
+    public void addBox(Position pos) {
+        cells[pos.getRow()][pos.getColumn()] = new Cell(new Box());
+        boxes.add(pos);
+    }
+
+    public void addGoal(Position pos) {
+        cells[pos.getRow()][pos.getColumn()] = new Cell(new Goal());
+        goals.add(pos);
+    }
+
+    public void addSoko(Position pos) {
+        cells[pos.getRow()][pos.getColumn()] = new Cell(new Player(0));
+        start = pos;
+    }
+
+    public void addFloor(Position pos) {
+        cells[pos.getRow()][pos.getColumn()] = new Cell(new Floor());
     }
 
     /**

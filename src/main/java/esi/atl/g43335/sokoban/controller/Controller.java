@@ -12,6 +12,10 @@ public class Controller {
 
     private Game game;
     private View view;
+    private final String up = "z";
+    private final String left = "q";
+    private final String right = "d";
+    private final String down = "s";
 
     public Controller(Game game, View view) {
         this.game = game;
@@ -34,17 +38,18 @@ public class Controller {
     }
 
     public void commands(String[] arrayOfArgs) {
+
         switch (arrayOfArgs[0]) {
-            case "z":
+            case up:
                 game.move(Direction.UP);
                 break;
-            case "s":
+            case down:
                 game.move(Direction.DOWN);
                 break;
-            case "q":
+            case left:
                 game.move(Direction.LEFT);
                 break;
-            case "d":
+            case right:
                 game.move(Direction.RIGHT);
                 break;
             case "help":
