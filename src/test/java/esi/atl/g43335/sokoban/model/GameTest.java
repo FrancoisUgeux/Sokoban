@@ -148,7 +148,7 @@ public class GameTest {
         System.out.println("undo");
         Game instance = null;
         instance.undo();
-        fail("The test case is a prototype.");
+        fail("The test case is a prototype."); //@srv à terminer .
     }
 
     @Test

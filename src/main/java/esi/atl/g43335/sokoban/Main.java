@@ -12,7 +12,7 @@ import esi.atl.g43335.sokoban.view.View;
  *
  * @author franc
  */
-public class Main {
+public class main {//@srv MAJUSCULE
 
     public static void main(String[] args) {
         Game game = new Game(0);
