@@ -12,6 +12,8 @@ public class Controller {
 
     private Game game;
     private View view;
+    private boolean surrender;
+    private boolean isOver;
     private final String up = "z";
     private final String left = "q";
     private final String right = "d";
@@ -20,6 +22,8 @@ public class Controller {
     public Controller(Game game, View view) {
         this.game = game;
         this.view = view;
+        surrender = false;
+        isOver = false;
     }
 
     public void start() {
@@ -30,10 +34,25 @@ public class Controller {
         arrayOfArgs = view.askCommand().split(" ");
         game.start(Integer.parseInt(arrayOfArgs[0]));
         view.displayMaze(game.getMaze().getCells());
+        playLevel(Integer.parseInt(arrayOfArgs[0]));
+        
+    }
+    
+    public void playLevel(int level){
+        String[] arrayOfArgs;
         do {
             arrayOfArgs = view.askCommand().split(" ");
             commands(arrayOfArgs);
-        } while (!arrayOfArgs[0].equalsIgnoreCase("quit"));
+        } while (!arrayOfArgs[0].equalsIgnoreCase("quit") && !surrender && !isOver);
+        if (surrender) {
+            surrender = false;
+            start();
+        }else if(isOver && game.getCurrentLevel() <= 1){
+            game.nextLevel();
+            playLevel(game.getCurrentLevel());
+        }else if (isOver){
+            view.displayWinner();
+        }
         view.displayQuit();
     }
 
@@ -42,33 +61,59 @@ public class Controller {
         switch (arrayOfArgs[0]) {
             case up:
                 game.move(Direction.UP);
+                view.displayNbMoves(game.getNbMoves());
+                view.displayMaze(game.getMaze().getCells());
+                if (game.isOver()) {
+                    isOver = true;
+                }
                 break;
             case down:
                 game.move(Direction.DOWN);
+                view.displayNbMoves(game.getNbMoves());
+                view.displayMaze(game.getMaze().getCells());
+                if (game.isOver()) {
+                    isOver = true;
+                }
                 break;
             case left:
                 game.move(Direction.LEFT);
+                view.displayNbMoves(game.getNbMoves());
+                view.displayMaze(game.getMaze().getCells());
+                if (game.isOver()) {
+                    isOver = true;
+                }
                 break;
             case right:
                 game.move(Direction.RIGHT);
+                view.displayNbMoves(game.getNbMoves());
+                view.displayMaze(game.getMaze().getCells());
+                if (game.isOver()) {
+                    isOver = true;
+                }
                 break;
             case "help":
                 view.displayHelp();
                 break;
             case "undo":
                 game.undo();
+                view.displayMaze(game.getMaze().getCells());
                 break;
             case "redo":
                 game.redo();
+                view.displayMaze(game.getMaze().getCells());
                 break;
             case "restart":
                 game.restart();
+                view.displayMaze(game.getMaze().getCells());
                 break;
             case "next":
                 game.nextLevel();
+                view.displayMaze(game.getMaze().getCells());
+                break;
+            case "surrender":
+                game.setNbMoves(0);
+                surrender = true;
                 break;
         }
-        view.displayMaze(game.getMaze().getCells());
-        view.displayNbMoves(game.getNbMoves());
     }
 }

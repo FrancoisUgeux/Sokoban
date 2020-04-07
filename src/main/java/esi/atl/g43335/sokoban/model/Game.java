@@ -40,6 +40,14 @@ public class Game implements Model {
         return maze;
     }
 
+    public int getCurrentLevel() {
+        return currentLevel;
+    }
+
+    public void setNbMoves(int nbMoves) {
+        this.nbMoves = nbMoves;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -110,11 +118,6 @@ public class Game implements Model {
     }
 
     @Override
-    public void giveUp() {
-//@srv todo
-    }
-
-    @Override
     public void restart() {
         start(currentLevel);
         nbMoves = 0;
@@ -123,12 +126,13 @@ public class Game implements Model {
     @Override
     public void nextLevel() {
         currentLevel++;
-        start(currentLevel);
         nbMoves = 0;
+        start(currentLevel);
     }
 
     @Override
     public void move(Direction dir) {
+        sokoPos = maze.getStart();
         Position target = sokoPos.next(dir);
         Item item = maze.getCell(sokoPos).getItem();
         if (maze.isFree(target) || maze.isGoal(target)) {
@@ -136,7 +140,7 @@ public class Game implements Model {
             command.execute();
             undoStack.push(command);
             redoStack.clear();
-            sokoPos = target;       //setStart dans maze ?
+            maze.setStart(target);
             nbMoves++;
         } else if (canMove(target, dir) && maze.getCell(target).getItem().
                 getType() != ItemType.WALL) {
@@ -144,7 +148,7 @@ public class Game implements Model {
             command.execute();
             undoStack.push(command);
             redoStack.clear();
-            sokoPos = target;
+            maze.setStart(target);
             nbMoves++;
         }
     }

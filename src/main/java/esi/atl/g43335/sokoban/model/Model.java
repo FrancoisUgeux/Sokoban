@@ -41,11 +41,6 @@ public interface Model {
     /**
      *
      */
-    void giveUp();
-
-    /**
-     *
-     */
     void restart();
 
     /**

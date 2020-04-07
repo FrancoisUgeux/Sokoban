@@ -98,6 +98,10 @@ public class Maze {
         return boxes;
     }
 
+    public void setStart(Position start) {
+        this.start = start;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -184,6 +188,9 @@ public class Maze {
             throw new IllegalArgumentException("out of the maze");
         }
         cells[pos.getRow()][pos.getColumn()].put(item);
+        if(isBox(pos)){
+            boxes.add(pos);
+        }
     }
 
     /**
@@ -193,6 +200,9 @@ public class Maze {
      */
     public void remove(Position pos) {
         cells[pos.getRow()][pos.getColumn()].remove();
+        if(isBox(pos)){
+            boxes.remove(pos);
+        }
     }
 
     /**

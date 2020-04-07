@@ -40,6 +40,8 @@ public class View {
         System.out.println("undo/redo: undo and redo your last command");
         System.out.println("restart: restart your current level");
         System.out.println("next: go to the next level");
+        System.out.println("surrender: go back to the menu");
+        System.out.println("quit: leave the game");
     }
 
     public String askCommand() {
@@ -60,5 +62,9 @@ public class View {
 
     public void displayNbMoves(int nbMoves) {
         System.out.println("you made " + nbMoves + " move(s)");
+    }
+
+    public void displayWinner() {
+        System.out.println("Congratulation you won and finished the game!");
     }
 }
