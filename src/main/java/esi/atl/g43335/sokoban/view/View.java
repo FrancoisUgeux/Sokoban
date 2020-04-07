@@ -67,4 +67,12 @@ public class View {
     public void displayWinner() {
         System.out.println("Congratulation you won and finished the game!");
     }
+
+    public void displayErrorUndo() {
+        System.out.println("you dont have any previous action left");
+    }
+
+    public void displayErrorRedo() {
+        System.out.println("Redo is only available after an undo");
+    }
 }

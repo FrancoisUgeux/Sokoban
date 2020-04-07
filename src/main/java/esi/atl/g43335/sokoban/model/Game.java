@@ -140,7 +140,7 @@ public class Game implements Model {
             command.execute();
             undoStack.push(command);
             redoStack.clear();
-            maze.setStart(target);
+            // maze.setStart(target);
             nbMoves++;
         } else if (canMove(target, dir) && maze.getCell(target).getItem().
                 getType() != ItemType.WALL) {
@@ -148,7 +148,7 @@ public class Game implements Model {
             command.execute();
             undoStack.push(command);
             redoStack.clear();
-            maze.setStart(target);
+            // maze.setStart(target);
             nbMoves++;
         }
     }
@@ -176,5 +176,13 @@ public class Game implements Model {
     public void redo() {
         undoStack.push(redoStack.peek());
         redoStack.pop().execute();
+    }
+
+    public boolean undoStackEmpty() {
+        return undoStack.empty();
+    }
+
+    public boolean redoStackEmpty() {
+        return redoStack.empty();
     }
 }

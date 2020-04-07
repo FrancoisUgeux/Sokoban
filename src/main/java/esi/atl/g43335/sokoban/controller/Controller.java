@@ -35,10 +35,9 @@ public class Controller {
         game.start(Integer.parseInt(arrayOfArgs[0]));
         view.displayMaze(game.getMaze().getCells());
         playLevel(Integer.parseInt(arrayOfArgs[0]));
-        
     }
-    
-    public void playLevel(int level){
+
+    public void playLevel(int level) {
         String[] arrayOfArgs;
         do {
             arrayOfArgs = view.askCommand().split(" ");
@@ -47,10 +46,10 @@ public class Controller {
         if (surrender) {
             surrender = false;
             start();
-        }else if(isOver && game.getCurrentLevel() <= 1){
+        } else if (isOver && game.getCurrentLevel() <= 1) {
             game.nextLevel();
             playLevel(game.getCurrentLevel());
-        }else if (isOver){
+        } else if (isOver) {
             view.displayWinner();
         }
         view.displayQuit();
@@ -95,12 +94,20 @@ public class Controller {
                 view.displayHelp();
                 break;
             case "undo":
-                game.undo();
-                view.displayMaze(game.getMaze().getCells());
+                if (game.undoStackEmpty()) {
+                    view.displayErrorUndo();
+                } else {
+                    game.undo();
+                    view.displayMaze(game.getMaze().getCells());
+                }
                 break;
             case "redo":
-                game.redo();
-                view.displayMaze(game.getMaze().getCells());
+                if (game.redoStackEmpty()) {
+                    view.displayErrorRedo();
+                } else {
+                    game.redo();
+                    view.displayMaze(game.getMaze().getCells());
+                }
                 break;
             case "restart":
                 game.restart();
