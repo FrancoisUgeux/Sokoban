@@ -5,10 +5,6 @@ import esi.atl.g43335.sokoban.model.items.Wall;
 import esi.atl.g43335.sokoban.model.items.Goal;
 import esi.atl.g43335.sokoban.model.items.Box;
 import esi.atl.g43335.sokoban.model.items.Player;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -25,8 +21,8 @@ public class Maze {
     private static final int COLUMNS = 40;
     private final Cell[][] cells;
     private Position start;
-    private ArrayList<Position> boxes = new ArrayList();
-    private ArrayList<Position> goals = new ArrayList();
+    private final ArrayList<Position> boxes = new ArrayList();
+    private final ArrayList<Position> goals = new ArrayList();
 
     /**
      * Build an empty board made of floor before calling a level builder to add
@@ -98,10 +94,15 @@ public class Maze {
         return boxes;
     }
 
+    /**
+     * change the starting position for a move. equals to the position of Soko.
+     *
+     * @param start
+     */
     public void setStart(Position start) {
         this.start = start;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -144,7 +145,7 @@ public class Maze {
      * @param position is a position to check on the board.
      * @return true if this position is inside the board.
      */
-    public boolean isInside(Position position) {
+    boolean isInside(Position position) {
         return (position.getRow() < cells.length
                 && position.getRow() >= 0
                 && position.getColumn() < cells[0].length
@@ -188,7 +189,7 @@ public class Maze {
             throw new IllegalArgumentException("out of the maze");
         }
         cells[pos.getRow()][pos.getColumn()].put(item);
-        if(isBox(pos)){
+        if (isBox(pos)) {
             boxes.add(pos);
         }
     }
@@ -200,7 +201,7 @@ public class Maze {
      */
     public void remove(Position pos) {
         cells[pos.getRow()][pos.getColumn()].remove();
-        if(isBox(pos)){
+        if (isBox(pos)) {
             boxes.remove(pos);
         }
     }
@@ -224,7 +225,7 @@ public class Maze {
      */
     public boolean isGoal(Position pos) {
         return (cells[pos.getRow()][pos.getColumn()].
-                getItem().getType() == ItemType.GOAL);
+                getItem().getType() == ItemType.GOAL || isBoxGoal(pos));
     }
 
     /**

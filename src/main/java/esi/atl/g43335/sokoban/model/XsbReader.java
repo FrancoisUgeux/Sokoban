@@ -1,14 +1,8 @@
 package esi.atl.g43335.sokoban.model;
 
-import esi.atl.g43335.sokoban.model.items.Box;
-import esi.atl.g43335.sokoban.model.items.Floor;
-import esi.atl.g43335.sokoban.model.items.Goal;
-import esi.atl.g43335.sokoban.model.items.Player;
-import esi.atl.g43335.sokoban.model.items.Wall;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  *
@@ -17,7 +11,7 @@ import java.util.ArrayList;
 public class XsbReader {
 
     private static final int COLUMNS = 40;
-    private Maze maze;
+    private final Maze maze;
     private final char wall = '#';
     private final char box = '$';
     private final char goal = '.';

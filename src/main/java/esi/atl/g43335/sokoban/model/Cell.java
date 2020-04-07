@@ -75,9 +75,6 @@ public class Cell {
      * @param item is the item to put on this cell.
      */
     public void put(Item item) {
-//        if (!this.item.isCrosseable()) {
-//            throw new IllegalStateException("Must be a crosseable item(goal,floor)");
-//        }
         this.item = item;
     }
 

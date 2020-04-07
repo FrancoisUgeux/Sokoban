@@ -151,14 +151,6 @@ public class Game implements Model {
         }
     }
 
-    /**
-     * Check if the item on a position can move on the cell in the given
-     * direction.
-     *
-     * @param pos is the starting position
-     * @param dir the direction the item should move
-     * @return true if the item can be placed in that direction.
-     */
     @Override
     public boolean canMove(Position pos, Direction dir) {
         return (maze.isFree(pos.next(dir)) || maze.isGoal(pos.next(dir)));
