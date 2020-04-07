@@ -140,7 +140,6 @@ public class Game implements Model {
             command.execute();
             undoStack.push(command);
             redoStack.clear();
-            // maze.setStart(target);
             nbMoves++;
         } else if (canMove(target, dir) && maze.getCell(target).getItem().
                 getType() != ItemType.WALL) {
@@ -148,7 +147,6 @@ public class Game implements Model {
             command.execute();
             undoStack.push(command);
             redoStack.clear();
-            // maze.setStart(target);
             nbMoves++;
         }
     }
