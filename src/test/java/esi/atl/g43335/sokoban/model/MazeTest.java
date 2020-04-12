@@ -222,54 +222,101 @@ public class MazeTest {
     @Test
     public void testRemove() {
         System.out.println("remove");
-        Position pos = null;
+        Position pos = new Position(1, 1);
         Maze instance = new Maze();
+        instance.put(new Item(ItemType.GOAL, false), pos);
         instance.remove(pos);
-        fail("The test case is a prototype.");
+        Item expResult = new Floor();
+        Item result = instance.getCell(pos).getItem();
+        assertEquals(expResult, result);
     }
 
     @Test
     public void testIsBox() {
         System.out.println("isBox");
-        Position pos = null;
+        Position pos = new Position(1,1);
         Maze instance = new Maze();
+        instance.put(new Box(), pos);
+        boolean expResult = true;
+        boolean result = instance.isBox(pos);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testIsNotBox() {
+        System.out.println("isNotBox");
+        Position pos = new Position(1,1);
+        Maze instance = new Maze();
+        instance.put(new Wall(), pos);
         boolean expResult = false;
         boolean result = instance.isBox(pos);
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
     }
 
     @Test
     public void testIsGoal() {
         System.out.println("isGoal");
-        Position pos = null;
+        Position pos = new Position(1,1);
         Maze instance = new Maze();
+        instance.put(new Goal(), pos);
+        boolean expResult = true;
+        boolean result = instance.isGoal(pos);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testIsNotGoal() {
+        System.out.println("isNotGoal");
+        Position pos = new Position(1,1);
+        Maze instance = new Maze();
+        instance.put(new Wall(), pos);
         boolean expResult = false;
         boolean result = instance.isGoal(pos);
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
     }
 
     @Test
     public void testIsBoxGoal() {
         System.out.println("isBoxGoal");
-        Position pos = null;
+        Position pos = new Position(1,1);
         Maze instance = new Maze();
+        instance.put(new BoxGoal(), pos);
+        boolean expResult = true;
+        boolean result = instance.isBoxGoal(pos);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testIsNotBoxGoal() {
+        System.out.println("isNotBoxGoal");
+        Position pos = new Position(1,1);
+        Maze instance = new Maze();
+        instance.put(new Wall(), pos);
         boolean expResult = false;
         boolean result = instance.isBoxGoal(pos);
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
     }
 
     @Test
     public void testIsSokoGoal() {
         System.out.println("isSokoGoal");
-        Position pos = null;
+        Position pos = new Position(1,1);
         Maze instance = new Maze();
+        instance.put(new SokoGoal(), pos);
+        boolean expResult = true;
+        boolean result = instance.isSokoGoal(pos);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testIsNotSokoGoal() {
+        System.out.println("isSokoGoal");
+        Position pos = new Position(1,1);
+        Maze instance = new Maze();
+        instance.put(new Wall(), pos);
         boolean expResult = false;
         boolean result = instance.isSokoGoal(pos);
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
     }
 
 }

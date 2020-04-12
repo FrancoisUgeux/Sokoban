@@ -59,55 +59,25 @@ public class Controller {
 
         switch (arrayOfArgs[0]) {
             case up:
-                game.move(Direction.UP);
-                view.displayNbMoves(game.getNbMoves());
-                view.displayMaze(game.getMaze().getCells());
-                if (game.isOver()) {
-                    isOver = true;
-                }
+                move(Direction.UP);
                 break;
             case down:
-                game.move(Direction.DOWN);
-                view.displayNbMoves(game.getNbMoves());
-                view.displayMaze(game.getMaze().getCells());
-                if (game.isOver()) {
-                    isOver = true;
-                }
+                move(Direction.DOWN);
                 break;
             case left:
-                game.move(Direction.LEFT);
-                view.displayNbMoves(game.getNbMoves());
-                view.displayMaze(game.getMaze().getCells());
-                if (game.isOver()) {
-                    isOver = true;
-                }
+                move(Direction.LEFT);
                 break;
             case right:
-                game.move(Direction.RIGHT);
-                view.displayNbMoves(game.getNbMoves());
-                view.displayMaze(game.getMaze().getCells());
-                if (game.isOver()) {
-                    isOver = true;
-                }
+                move(Direction.RIGHT);
                 break;
             case "help":
                 view.displayHelp();
                 break;
             case "undo":
-                if (game.undoStackEmpty()) {
-                    view.displayErrorUndo();
-                } else {
-                    game.undo();
-                    view.displayMaze(game.getMaze().getCells());
-                }
+                undo();
                 break;
             case "redo":
-                if (game.redoStackEmpty()) {
-                    view.displayErrorRedo();
-                } else {
-                    game.redo();
-                    view.displayMaze(game.getMaze().getCells());
-                }
+                redo();
                 break;
             case "restart":
                 game.restart();
@@ -121,6 +91,33 @@ public class Controller {
                 game.setNbMoves(0);
                 surrender = true;
                 break;
+        }
+    }
+
+    private void move(Direction dir) {
+        game.move(dir);
+        view.displayNbMoves(game.getNbMoves());
+        view.displayMaze(game.getMaze().getCells());
+        if (game.isOver()) {
+            isOver = true;
+        }
+    }
+
+    private void undo() {
+        if (game.undoStackEmpty()) {
+            view.displayErrorUndo();
+        } else {
+            game.undo();
+            view.displayMaze(game.getMaze().getCells());
+        }
+    }
+
+    private void redo() {
+        if (game.redoStackEmpty()) {
+            view.displayErrorRedo();
+        } else {
+            game.redo();
+            view.displayMaze(game.getMaze().getCells());
         }
     }
 }

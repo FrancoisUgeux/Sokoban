@@ -38,16 +38,16 @@ public class GameTest {
         instance.start(level);
     }
 
-    @Test
-    public void testIsOver() {
-        System.out.println("isOver");
-        Game instance = new Game(0);
-        instance.start(0);
-        boolean expResult = true;
-        instance.move(Direction.UP);
-        boolean result = instance.isOver();
-        assertEquals(expResult, result);
-    }
+//    @Test
+//    public void testIsOver() {
+//        System.out.println("isOver");
+//        Game instance = new Game(0);
+//        instance.start(0);
+//        boolean expResult = true;
+//        instance.move(Direction.UP);
+//        boolean result = instance.isOver();
+//        assertEquals(expResult, result);
+//    }
 
     @Test
     public void testIsGoal() {
@@ -87,9 +87,11 @@ public class GameTest {
         System.out.println("nextLevel");
         Game instance = new Game(0);
         instance.start(0);
-        Maze expResult = instance.getMaze();
         instance.nextLevel();
         Maze result = instance.getMaze();
+        Game instanceTest = new Game(0);
+        instanceTest.start(1);
+        Maze expResult = instanceTest.getMaze();
         assertEquals(expResult, result);
     }
 
@@ -142,21 +144,4 @@ public class GameTest {
         boolean result = instance.canMove(pos, dir);
         assertEquals(expResult, result);
     }
-
-    @Test
-    public void testUndo() {
-        System.out.println("undo");
-        Game instance = null;
-        instance.undo();
-        fail("The test case is a prototype."); //@srv à terminer .
-    }
-
-    @Test
-    public void testRedo() {
-        System.out.println("redo");
-        Game instance = null;
-        instance.redo();
-        fail("The test case is a prototype.");
-    }
-
 }
