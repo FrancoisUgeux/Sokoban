@@ -74,14 +74,14 @@ public class Cell {
      *
      * @param item is the item to put on this cell.
      */
-    public void put(Item item) {
+    void put(Item item) {
         this.item = item;
     }
 
     /**
      * Remove what's on this cell.
      */
-    public void remove() {
+    void remove() {
         item = new Floor();
     }
 }

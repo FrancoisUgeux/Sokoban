@@ -109,6 +109,21 @@ public class GameTest {
     }
 
     @Test
+    public void testMoveOnGoal() {
+        System.out.println("moveOnGoal");
+        Game instance = new Game(0);
+        instance.start(0);
+        instance.move(Direction.RIGHT);
+        instance.move(Direction.UP);
+        instance.move(Direction.UP);
+        instance.move(Direction.LEFT);
+        ItemType result = instance.getMaze().getCell(new Position(1, 2)).
+                getItem().getType();
+        ItemType expResult = ItemType.SOKOGOAL;
+        assertEquals(expResult, result);
+    }
+
+    @Test
     public void testMoveInWall() {
         System.out.println("moveInWall");
         Direction dir = Direction.LEFT;
@@ -119,6 +134,91 @@ public class GameTest {
                 getItem().getType();
         ItemType expResult = ItemType.PLAYER;
         assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testMoveBox(){
+        System.out.println("moveBox");
+        Game instance = new Game(0);
+        Position pos = new Position(2,3);
+        instance.start(0);
+        instance.move(Direction.LEFT);
+        instance.move(Direction.UP);
+        instance.move(Direction.RIGHT);
+        ItemType result = instance.getMaze().getCell(pos).getItem().getType();
+        ItemType expResult = ItemType.BOX;
+        assertEquals(result, expResult);
+    }
+    
+    @Test
+    public void testMoveBoxInWall(){
+        System.out.println("moveBoxInWall");
+        Game instance = new Game(0);
+        Position pos = new Position(2,3);
+        instance.start(0);
+        instance.move(Direction.LEFT);
+        instance.move(Direction.UP);
+        instance.move(Direction.RIGHT);
+        instance.move(Direction.RIGHT);
+        ItemType result = instance.getMaze().getCell(pos).getItem().getType();
+        ItemType expResult = ItemType.BOX;
+        assertEquals(result, expResult);
+    }
+    
+    @Test
+    public void testMoveBoxOnGoal(){
+        System.out.println("moveBoxOnGoal");
+        Game instance = new Game(0);
+        Position pos = new Position(1,2);
+        instance.start(0);
+        instance.move(Direction.UP);
+        ItemType result = instance.getMaze().getCell(pos).getItem().getType();
+        ItemType expResult = ItemType.BOXGOAL;
+        assertEquals(result, expResult);
+    }
+    
+    @Test
+    public void testMoveBoxFromGoal(){
+        System.out.println("moveBoxFromGoal");
+        Game instance = new Game(0);
+        Position pos = new Position(1,1);
+        instance.start(0);
+        instance.move(Direction.UP);
+        instance.move(Direction.RIGHT);
+        instance.move(Direction.UP);
+        instance.move(Direction.LEFT);
+        ItemType result = instance.getMaze().getCell(pos).getItem().getType();
+        ItemType expResult = ItemType.BOX;
+        assertEquals(result, expResult);
+    }
+    
+    @Test
+    public void testMoveBoxinWallFromSokoGoal(){
+        System.out.println("moveBoxInWallFromSokoGoal");
+        Game instance = new Game(0);
+        Position pos = new Position(1,1);
+        instance.start(0);
+        instance.move(Direction.UP);
+        instance.move(Direction.RIGHT);
+        instance.move(Direction.UP);
+        instance.move(Direction.LEFT);
+        instance.move(Direction.LEFT);
+        ItemType result = instance.getMaze().getCell(pos).getItem().getType();
+        ItemType expResult = ItemType.BOX;
+        assertEquals(result, expResult);
+    }
+    
+    @Test
+    public void testMoveBoxinWallFromBoxGoal(){
+        System.out.println("moveBoxInWallFromSokoGoal");
+        Game instance = new Game(0);
+        Position pos = new Position(1,2);
+        instance.start(0);
+        instance.move(Direction.UP);
+        instance.move(Direction.UP);
+        ItemType result = instance.getMaze().getCell(pos).getItem().getType();
+        ItemType expResult = ItemType.BOXGOAL;
+        assertEquals(result, expResult);
     }
 
     @Test

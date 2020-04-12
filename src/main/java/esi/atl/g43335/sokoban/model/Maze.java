@@ -51,26 +51,26 @@ public class Maze {
         }
     }
 
-    public void addWall(Position pos) {
+    void addWall(Position pos) {
         cells[pos.getRow()][pos.getColumn()] = new Cell(new Wall());
     }
 
-    public void addBox(Position pos) {
+    void addBox(Position pos) {
         cells[pos.getRow()][pos.getColumn()] = new Cell(new Box());
         boxes.add(pos);
     }
 
-    public void addGoal(Position pos) {
+    void addGoal(Position pos) {
         cells[pos.getRow()][pos.getColumn()] = new Cell(new Goal());
         goals.add(pos);
     }
 
-    public void addSoko(Position pos) {
+    void addSoko(Position pos) {
         cells[pos.getRow()][pos.getColumn()] = new Cell(new Player(0));
         start = pos;
     }
 
-    public void addFloor(Position pos) {
+    void addFloor(Position pos) {
         cells[pos.getRow()][pos.getColumn()] = new Cell(new Floor());
     }
 
@@ -212,7 +212,7 @@ public class Maze {
      * @param pos the position to check.
      * @return true if there is a box on that position.
      */
-    public boolean isBox(Position pos) {
+    boolean isBox(Position pos) {
         return (cells[pos.getRow()][pos.getColumn()].
                 getItem().getType() == ItemType.BOX);
     }
