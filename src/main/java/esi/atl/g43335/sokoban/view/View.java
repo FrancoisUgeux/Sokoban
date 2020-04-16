@@ -26,9 +26,9 @@ public class View {
                 } else if (cell.getItem().getType() == ItemType.PLAYER) {
                     System.out.print("@");
                 } else if (cell.getItem().getType() == ItemType.BOXGOAL) {
-                    System.out.print("+");
-                } else if (cell.getItem().getType() == ItemType.SOKOGOAL) {
                     System.out.print("*");
+                } else if (cell.getItem().getType() == ItemType.SOKOGOAL) {
+                    System.out.print("+");
                 }
             }
             System.out.println("");
@@ -74,5 +74,9 @@ public class View {
 
     public void displayErrorRedo() {
         System.out.println("Redo is only available after an undo");
+    }
+
+    public void displayWinnerLvl() {
+        System.out.println("Congratulation you won this level");
     }
 }

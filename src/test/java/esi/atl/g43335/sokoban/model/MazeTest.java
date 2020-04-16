@@ -46,17 +46,6 @@ public class MazeTest {
     }
 
     @Test
-    public void testGetBoxes() {
-        System.out.println("getBoxes");
-        Maze instance = new Maze();
-        instance.chooseLevel(0);
-        ArrayList<Position> expResult = new ArrayList();
-        expResult.add(new Position(2, 2));
-        ArrayList<Position> result = instance.getBoxes();
-        assertEquals(expResult, result);
-    }
-
-    @Test
     public void testIsInside() {
         System.out.println("isInside");
         Position position = new Position(3, 3);

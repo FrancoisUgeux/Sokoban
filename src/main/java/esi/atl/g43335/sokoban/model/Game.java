@@ -103,13 +103,7 @@ public class Game implements Model {
 
     @Override
     public boolean isOver() {
-        ArrayList<Position> boxes = maze.getBoxes();
-        for (Position box : boxes) {
-            if (!isGoal(box)) {
-                return false;
-            }
-        }
-        return true;
+        return maze.getNbGoals() == 0;
     }
 
     @Override
@@ -121,12 +115,15 @@ public class Game implements Model {
     public void restart() {
         start(currentLevel);
         nbMoves = 0;
+        undoStack.clear();
     }
 
     @Override
     public void nextLevel() {
         currentLevel++;
         nbMoves = 0;
+        undoStack.clear();
+        redoStack.clear();
         start(currentLevel);
     }
 
@@ -136,14 +133,14 @@ public class Game implements Model {
         Position target = sokoPos.next(dir);
         Item item = maze.getCell(sokoPos).getItem();
         if (maze.isFree(target) || (maze.isGoal(target) && !maze.isBoxGoal(target))) {
-            Command command = new moveCommand(maze, sokoPos, target, item, nbMoves);
+            Command command = new moveCommand(maze, sokoPos, target, item, nbMoves,this);
             command.execute();
             undoStack.push(command);
             redoStack.clear();
             nbMoves++;
         } else if (canMove(target, dir) && maze.getCell(target).getItem().
                 getType() != ItemType.WALL) {
-            Command command = new moveCommandPB(maze, sokoPos, target, item, dir, nbMoves);
+            Command command = new moveCommandPB(maze, sokoPos, target, item, dir, nbMoves,this);
             command.execute();
             undoStack.push(command);
             redoStack.clear();

@@ -21,8 +21,7 @@ public class Maze {
     private static final int COLUMNS = 40;
     private final Cell[][] cells;
     private Position start;
-    private final ArrayList<Position> boxes = new ArrayList();
-    private final ArrayList<Position> goals = new ArrayList();
+    private int nbGoals = 0;
 
     /**
      * Build an empty board made of floor before calling a level builder to add
@@ -57,12 +56,11 @@ public class Maze {
 
     void addBox(Position pos) {
         cells[pos.getRow()][pos.getColumn()] = new Cell(new Box());
-        boxes.add(pos);
     }
 
     void addGoal(Position pos) {
         cells[pos.getRow()][pos.getColumn()] = new Cell(new Goal());
-        goals.add(pos);
+        nbGoals++;
     }
 
     void addSoko(Position pos) {
@@ -86,12 +84,8 @@ public class Maze {
         return cells[position.getRow()][position.getColumn()];
     }
 
-    /**
-     *
-     * @return the list of boxes placed on the board.
-     */
-    public ArrayList<Position> getBoxes() {
-        return boxes;
+    public int getNbGoals() {
+        return nbGoals;
     }
 
     /**
@@ -102,14 +96,16 @@ public class Maze {
     public void setStart(Position start) {
         this.start = start;
     }
+    
+    public void setNbGoals(int nb){
+        nbGoals = nb;
+    }
 
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 71 * hash + Arrays.deepHashCode(this.cells);
         hash = 71 * hash + Objects.hashCode(this.start);
-        hash = 71 * hash + Objects.hashCode(this.boxes);
-        hash = 71 * hash + Objects.hashCode(this.goals);
         return hash;
     }
 
@@ -129,12 +125,6 @@ public class Maze {
             return false;
         }
         if (!Objects.equals(this.start, other.start)) {
-            return false;
-        }
-        if (!Objects.equals(this.boxes, other.boxes)) {
-            return false;
-        }
-        if (!Objects.equals(this.goals, other.goals)) {
             return false;
         }
         return true;
@@ -189,9 +179,6 @@ public class Maze {
             throw new IllegalArgumentException("out of the maze");
         }
         cells[pos.getRow()][pos.getColumn()].put(item);
-        if (isBox(pos)) {
-            boxes.add(pos);
-        }
     }
 
     /**
@@ -201,9 +188,6 @@ public class Maze {
      */
     public void remove(Position pos) {
         cells[pos.getRow()][pos.getColumn()].remove();
-        if (isBox(pos)) {
-            boxes.remove(pos);
-        }
     }
 
     /**

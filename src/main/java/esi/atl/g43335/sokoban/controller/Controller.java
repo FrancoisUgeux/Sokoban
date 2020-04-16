@@ -47,7 +47,10 @@ public class Controller {
             surrender = false;
             start();
         } else if (isOver && game.getCurrentLevel() <= 1) {
+            view.displayWinnerLvl();
+            isOver = false;
             game.nextLevel();
+            view.displayMaze(game.getMaze().getCells());
             playLevel(game.getCurrentLevel());
         } else if (isOver) {
             view.displayWinner();
