@@ -133,14 +133,14 @@ public class Game implements Model {
         Position target = sokoPos.next(dir);
         Item item = maze.getCell(sokoPos).getItem();
         if (maze.isFree(target) || (maze.isGoal(target) && !maze.isBoxGoal(target))) {
-            Command command = new moveCommand(maze, sokoPos, target, item, nbMoves,this);
+            Command command = new moveCommand(maze, sokoPos, target, item, nbMoves, this);
             command.execute();
             undoStack.push(command);
             redoStack.clear();
             nbMoves++;
         } else if (canMove(target, dir) && maze.getCell(target).getItem().
                 getType() != ItemType.WALL) {
-            Command command = new moveCommandPB(maze, sokoPos, target, item, dir, nbMoves,this);
+            Command command = new moveCommandPB(maze, sokoPos, target, item, dir, nbMoves, this);
             command.execute();
             undoStack.push(command);
             redoStack.clear();

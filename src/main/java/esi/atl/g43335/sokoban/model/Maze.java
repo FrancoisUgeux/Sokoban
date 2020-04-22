@@ -64,7 +64,7 @@ public class Maze {
     }
 
     void addSoko(Position pos) {
-        cells[pos.getRow()][pos.getColumn()] = new Cell(new Player(0));
+        cells[pos.getRow()][pos.getColumn()] = new Cell(new Player());
         start = pos;
     }
 

@@ -40,7 +40,7 @@ public class MazeTest {
         Position position = new Position(3, 2);
         Maze instance = new Maze();
         instance.chooseLevel(0);
-        ItemType expResult = new Player(0).getType();
+        ItemType expResult = new Player().getType();
         ItemType result = instance.getCell(position).getItem().getType();
         assertEquals(expResult, result);
     }
@@ -181,11 +181,11 @@ public class MazeTest {
     @Test
     public void testPutPlayer() {
         System.out.println("putPlayer");
-        Item item = new Player(0);
+        Item item = new Player();
         Position pos = new Position(0, 0);
         Maze instance = new Maze();
         instance.put(item, pos);
-        assertTrue(instance.getCell(pos).getItem().getType() == new Player(0).getType());
+        assertTrue(instance.getCell(pos).getItem().getType() == new Player().getType());
     }
 
     @Test
