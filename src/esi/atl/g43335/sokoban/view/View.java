@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class View {
 
-    private Scanner in = new Scanner(System.in);
+    private final Scanner in = new Scanner(System.in);
 
     public void displayMaze(Cell[][] cells) {
         for (int i = 0; i < cells.length; i++) {
