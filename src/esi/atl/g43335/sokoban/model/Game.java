@@ -2,7 +2,6 @@ package esi.atl.g43335.sokoban.model;
 
 import esi.atl.g43335.sokoban.model.commands.moveCommand;
 import esi.atl.g43335.sokoban.model.commands.moveCommandPB;
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Stack;
 

@@ -17,8 +17,8 @@ import java.util.Objects;
  */
 public class Maze {
 
-    private static final int ROWS = 40;
-    private static final int COLUMNS = 40;
+    private static final int ROWS = 30;
+    private static final int COLUMNS = 30;
     private final Cell[][] cells;
     private Position start;
     private int nbGoals = 0;

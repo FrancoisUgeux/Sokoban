@@ -1,4 +1,4 @@
-package esi.atl.g43335.sokoban;
+package esi.atl.g43335.sokoban.view;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -49,21 +49,7 @@ public class App extends Application {
         HBox stats = new HBox();
         stats.setAlignment(Pos.CENTER_RIGHT);
 
-        GridPane board = new GridPane();
-        board.setPrefSize(800, 800);
-
-        for (int i = 0; i < BOARD_SIZE; i++) {
-            for (int j = 0; j < BOARD_SIZE; j++) {
-                Rectangle tile = new Rectangle(10, 10);
-                tile.setFill(Color.CHARTREUSE);
-                tile.setStroke(Color.BLACK);
-                
-                GridPane.setRowIndex(tile,i);
-                GridPane.setColumnIndex(tile,j);
-
-                board.getChildren().add(tile);
-            }
-        }
+        BoardFX board = new BoardFX();
 
         gameBoard.getChildren().add(board);
         
@@ -71,5 +57,4 @@ public class App extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
 }
