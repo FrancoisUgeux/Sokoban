@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 public class XsbReader {
 
-    private static final int COLUMNS = 40;
+    private static final int COLUMNS = 30;
     private final Maze maze;
     private final char wall = '#';
     private final char box = '$';

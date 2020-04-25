@@ -6,11 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 /**
@@ -28,8 +25,7 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Sokoban");
-        primaryStage.setMinHeight(500);
-        primaryStage.setMinWidth(500);
+        primaryStage.setMaximized(true);
 
         VBox root = new VBox();
         root.setAlignment(Pos.TOP_CENTER);
@@ -43,16 +39,22 @@ public class App extends Application {
         root.getChildren().add(menuBar);
 
         HBox gameBoard = new HBox();
-        gameBoard.setAlignment(Pos.CENTER_LEFT);
+        gameBoard.setAlignment(Pos.CENTER);
         root.getChildren().add(gameBoard);
-
-        HBox stats = new HBox();
-        stats.setAlignment(Pos.CENTER_RIGHT);
 
         BoardFX board = new BoardFX();
 
         gameBoard.getChildren().add(board);
-        
+
+        HBox stats1 = new HBox();
+        stats1.setAlignment(Pos.CENTER_LEFT);
+
+        HBox stats2 = new HBox();
+        stats2.setAlignment(Pos.CENTER_RIGHT);
+
+        HBox menuBox = new HBox();
+        menuBox.setAlignment(Pos.BOTTOM_CENTER);
+
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
