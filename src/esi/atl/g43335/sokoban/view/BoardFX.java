@@ -3,8 +3,10 @@ package esi.atl.g43335.sokoban.view;
 import esi.atl.g43335.sokoban.model.ItemType;
 import esi.atl.g43335.sokoban.model.Maze;
 import esi.atl.g43335.sokoban.model.Position;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -19,7 +21,13 @@ public class BoardFX extends GridPane {
         Maze maze = new Maze();
         maze.chooseLevel(1);
         this.setPrefSize(800, 800);
-//        Image wall = new Image("/esi/atl/g43335/sokoban/resources/wall.png");
+        Image wall = new Image("/esi/atl/g43335/sokoban/resources/wall.png");
+        Image sokoGoal = new Image("/esi/atl/g43335/sokoban/resources/Sokogoal.png");
+        Image box = new Image("/esi/atl/g43335/sokoban/resources/box.png");
+        Image boxGoal = new Image("/esi/atl/g43335/sokoban/resources/boxGoal.png");
+        Image floor = new Image("/esi/atl/g43335/sokoban/resources/floor.png");
+        Image goal = new Image("/esi/atl/g43335/sokoban/resources/goal.png");
+        Image player = new Image("/esi/atl/g43335/sokoban/resources/player.png");
 
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
@@ -27,25 +35,32 @@ public class BoardFX extends GridPane {
                 Rectangle tile = new Rectangle(25, 25);
                 switch (itemType) {
                     case BOX:
-                        tile.setFill(Color.RED);
+                        ImagePattern imagePatternBox = new ImagePattern(box);
+                        tile.setFill(imagePatternBox);
                         break;
                     case BOXGOAL:
-                        tile.setFill(Color.GREEN);
+                        ImagePattern imagePatternBoxGoal = new ImagePattern(boxGoal);
+                        tile.setFill(imagePatternBoxGoal);
                         break;
                     case FLOOR:
-                        tile.setFill(Color.BLUE);
+                        ImagePattern imagePatternFloor = new ImagePattern(floor);
+                        tile.setFill(imagePatternFloor);
                         break;
                     case GOAL:
-                        tile.setFill(Color.BLUEVIOLET);
+                        ImagePattern imagePatternGoal = new ImagePattern(goal);
+                        tile.setFill(imagePatternGoal);
                         break;
                     case PLAYER:
-                        tile.setFill(Color.VIOLET);
+                        ImagePattern imagePatternPlayer = new ImagePattern(player);
+                        tile.setFill(imagePatternPlayer);
                         break;
                     case SOKOGOAL:
-                        tile.setFill(Color.HOTPINK);
+                        ImagePattern imagePatternSokoGoal = new ImagePattern(sokoGoal);
+                        tile.setFill(imagePatternSokoGoal);
                         break;
                     case WALL:
-                        tile.setFill(Color.BLACK);
+                        ImagePattern imagePatternWall = new ImagePattern(wall);
+                        tile.setFill(imagePatternWall);
                         break;
                 }
                 tile.setStroke(Color.BLACK);
