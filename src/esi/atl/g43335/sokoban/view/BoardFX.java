@@ -20,7 +20,7 @@ public class BoardFX extends GridPane {
     public BoardFX() {
         Maze maze = new Maze();
         maze.chooseLevel(1);
-        this.setPrefSize(800, 800);
+//        this.setPrefSize(800, 800);
         Image wall = new Image("/esi/atl/g43335/sokoban/resources/wall.png");
         Image sokoGoal = new Image("/esi/atl/g43335/sokoban/resources/Sokogoal.png");
         Image box = new Image("/esi/atl/g43335/sokoban/resources/box.png");
