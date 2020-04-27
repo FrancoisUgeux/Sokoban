@@ -14,12 +14,14 @@ import javafx.scene.layout.GridPane;
  */
 public class StatsLeftFX extends GridPane {
 
+    ChoiceBox levelSelect;
+
     public StatsLeftFX() {
         Game game = new Game(0);
 
         this.setHgap(10);
         this.setVgap(10);
-        ChoiceBox levelSelect = new ChoiceBox();
+        levelSelect = new ChoiceBox();
         levelSelect.setItems(FXCollections.observableArrayList("Level one",
                 "Test level"));
         levelSelect.setValue("Level one");
@@ -56,12 +58,15 @@ public class StatsLeftFX extends GridPane {
 
 //        Label goalsValue = new Label(Integer.toString(game.getMaze().getNbGoals()));
 //        this.add(goalsValue, 1, 2);
-
         Label boxGoal = new Label("goals already filled: ");
-        this.add(boxGoal, 1, 1);
+        this.add(boxGoal, 1, 2);
 
 //        Label boxGoalValue = new Label(Integer.toString(game.getMaze().getNbGoals()));
 //        this.add(boxGoalValue, 1, 2);
-
     }
+
+    public String getLevelSelect() {
+        return levelSelect.getValue().toString();
+    }
+
 }

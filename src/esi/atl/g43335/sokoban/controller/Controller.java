@@ -36,6 +36,10 @@ public class Controller {
         view.displayMaze(game.getMaze().getCells());
         playLevel(Integer.parseInt(arrayOfArgs[0]));
     }
+    
+    public void startFX(String arrayOfArgs){
+//        arrayOfArgs =
+    }
 
     public void playLevel(int level) {
         String[] arrayOfArgs;
@@ -56,6 +60,12 @@ public class Controller {
             view.displayWinner();
         }
         view.displayQuit();
+    }
+    
+    
+    
+    public void playLevelFX(int level){
+        
     }
 
     public void commands(String[] arrayOfArgs) {

@@ -17,9 +17,9 @@ public class BoardFX extends GridPane {
 
     private final int BOARD_SIZE = 30;
 
-    public BoardFX() {
-        Maze maze = new Maze();
-        maze.chooseLevel(1);
+    public BoardFX(Maze maze) {
+//        Maze maze = new Maze();
+//        maze.chooseLevel(1);
 //        this.setPrefSize(800, 800);
         Image wall = new Image("/esi/atl/g43335/sokoban/resources/wall.png");
         Image sokoGoal = new Image("/esi/atl/g43335/sokoban/resources/Sokogoal.png");
