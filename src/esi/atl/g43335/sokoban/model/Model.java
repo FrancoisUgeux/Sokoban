@@ -1,10 +1,12 @@
 package esi.atl.g43335.sokoban.model;
 
+import javafx.beans.Observable;
+
 /**
  *
  * @author franc
  */
-public interface Model {
+public interface Model extends Subject{
 
     /**
      *

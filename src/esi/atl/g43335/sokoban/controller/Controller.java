@@ -37,10 +37,6 @@ public class Controller {
         playLevel(Integer.parseInt(arrayOfArgs[0]));
     }
     
-    public void startFX(String arrayOfArgs){
-//        arrayOfArgs =
-    }
-
     public void playLevel(int level) {
         String[] arrayOfArgs;
         do {
@@ -62,12 +58,6 @@ public class Controller {
         view.displayQuit();
     }
     
-    
-    
-    public void playLevelFX(int level){
-        
-    }
-
     public void commands(String[] arrayOfArgs) {
 
         switch (arrayOfArgs[0]) {

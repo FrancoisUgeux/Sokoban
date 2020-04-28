@@ -1,6 +1,7 @@
 package esi.atl.g43335.sokoban.view;
 
 import esi.atl.g43335.sokoban.model.Game;
+import esi.atl.g43335.sokoban.model.Observer;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -12,12 +13,15 @@ import javafx.scene.layout.GridPane;
  *
  * @author franc
  */
-public class StatsLeftFX extends GridPane {
+public class StatsLeftFX extends GridPane implements Observer {
 
-    ChoiceBox levelSelect;
+    private ChoiceBox levelSelect;
+    private Label nbMovesValue;
+    private Label goalsValue;
+    private Game game;
 
-    public StatsLeftFX() {
-        Game game = new Game(0);
+    public StatsLeftFX(Game game) {
+        this.game = game;
 
         this.setHgap(10);
         this.setVgap(10);
@@ -50,11 +54,14 @@ public class StatsLeftFX extends GridPane {
         Label nbMoves = new Label("Your moves :");
         this.add(nbMoves, 1, 0);
 
-        Label nbMovesValue = new Label(Integer.toString(game.getNbMoves()));
+        nbMovesValue = new Label("0");
         this.add(nbMovesValue, 2, 0);
 
         Label goals = new Label("goals : ");
         this.add(goals, 1, 1);
+
+        goalsValue = new Label("0");
+        this.add(goalsValue, 2, 1);
 
 //        Label goalsValue = new Label(Integer.toString(game.getMaze().getNbGoals()));
 //        this.add(goalsValue, 1, 2);
@@ -65,8 +72,26 @@ public class StatsLeftFX extends GridPane {
 //        this.add(boxGoalValue, 1, 2);
     }
 
-    public String getLevelSelect() {
+    private String getLevelSelect() {
         return levelSelect.getValue().toString();
+    }
+
+    public int getLevelNb() {
+        String level = getLevelSelect();
+        switch (level) {
+            case "Level one":
+                return 1;
+            case "Test level":
+                return 0;
+            default:
+                return 42;
+        }
+    }
+
+    @Override
+    public void update() {
+        nbMovesValue.setText(Integer.toString(game.getNbMoves()));
+        goalsValue.setText(Integer.toString(game.getNbGoals()));
     }
 
 }

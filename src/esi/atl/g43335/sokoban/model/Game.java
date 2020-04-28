@@ -2,6 +2,8 @@ package esi.atl.g43335.sokoban.model;
 
 import esi.atl.g43335.sokoban.model.commands.moveCommand;
 import esi.atl.g43335.sokoban.model.commands.moveCommandPB;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Stack;
 
@@ -18,6 +20,7 @@ public class Game implements Model {
     private Position sokoPos;
     private final Stack<Command> undoStack;
     private final Stack<Command> redoStack;
+    private final List<Observer> observers;
 
     /**
      *
@@ -27,6 +30,7 @@ public class Game implements Model {
         this.nbMoves = nbMoves;
         undoStack = new Stack<>();
         redoStack = new Stack<>();
+        this.observers = new ArrayList<>();
     }
 
     @Override
@@ -41,6 +45,10 @@ public class Game implements Model {
 
     public int getCurrentLevel() {
         return currentLevel;
+    }
+
+    public int getNbGoals() {
+        return maze.getNbGoals();
     }
 
     public void setNbMoves(int nbMoves) {
@@ -170,5 +178,20 @@ public class Game implements Model {
 
     public boolean redoStackEmpty() {
         return redoStack.empty();
+    }
+
+    @Override
+    public void registerObserver(Observer obs) {
+        observers.add(obs);
+    }
+
+    @Override
+    public void remove(Observer obs) {
+        observers.remove(obs);
+    }
+
+    @Override
+    public void notifyObservers() {
+        observers.forEach(Observer::update);
     }
 }

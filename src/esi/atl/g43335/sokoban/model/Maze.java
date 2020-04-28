@@ -21,13 +21,14 @@ public class Maze {
     private static final int COLUMNS = 30;
     private final Cell[][] cells;
     private Position start;
-    private int nbGoals = 0;
+    private int nbGoals;
 
     /**
      * Build an empty board made of floor before calling a level builder to add
      * the maze on it
      */
     public Maze() {
+        this.nbGoals = 0;
         cells = new Cell[ROWS][COLUMNS];
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLUMNS; j++) {
@@ -46,7 +47,7 @@ public class Maze {
                 reader.levelBuilder("level1");
                 break;
             default:
-                reader.levelBuilder("levelTest");
+                reader.levelBuilder("default");
         }
     }
 
@@ -96,8 +97,8 @@ public class Maze {
     public void setStart(Position start) {
         this.start = start;
     }
-    
-    public void setNbGoals(int nb){
+
+    public void setNbGoals(int nb) {
         nbGoals = nb;
     }
 

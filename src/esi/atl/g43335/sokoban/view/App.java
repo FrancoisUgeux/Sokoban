@@ -4,7 +4,6 @@ import esi.atl.g43335.sokoban.controller.Controller;
 import esi.atl.g43335.sokoban.model.Game;
 import esi.atl.g43335.sokoban.model.Maze;
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -20,18 +19,43 @@ import javafx.stage.Stage;
  */
 public class App extends Application {
 
+    private Game game;
+    private Maze maze;
+    private View view;
+    private Controller controller;
+
+//    private BoardFX board;
+    public App() {
+
+//        board = new BoardFX(maze);
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public Maze getMaze() {
+        return maze;
+    }
+
+    public View getView() {
+        return view;
+    }
+
+    public Controller getController() {
+        return controller;
+    }
+
     public static void main(String[] args) {
         Application.launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
-        Game game = new Game(0);
-        Maze maze = new Maze();
-        View view = new View();
-        Controller controller = new Controller(game, view);
-        maze.chooseLevel(1);
+        this.game = new Game(0);
+        this.maze = new Maze();
+        this.view = new View();
+        this.controller = new Controller(game, view);
 
         primaryStage.setTitle("Sokoban");
         primaryStage.setMaximized(true);
@@ -55,13 +79,13 @@ public class App extends Application {
         borderPane.setLeft(stats1);
 //        root.getChildren().add(stats1);
         stats1.setPrefWidth(600);
-        StatsLeftFX statsLeft = new StatsLeftFX();
+        StatsLeftFX statsLeft = new StatsLeftFX(game);
         stats1.getChildren().add(statsLeft);
 
         HBox gameBoard = new HBox();
 //        gameBoard.setAlignment(Pos.CENTER);
-        borderPane.setCenter(gameBoard);
         BoardFX board = new BoardFX(maze);
+        borderPane.setCenter(gameBoard);
         gameBoard.getChildren().add(board);
 
         HBox stats2 = new HBox();
@@ -73,7 +97,7 @@ public class App extends Application {
         HBox playBox = new HBox();
 //        playBox.setAlignment(Pos.BOTTOM_CENTER);
         borderPane.setBottom(playBox);
-        PlayMenuFX playMenu = new PlayMenuFX();
+        PlayMenuFX playMenu = new PlayMenuFX(game, board, statsLeft);
         playBox.getChildren().add(playMenu);
 
         Scene scene = new Scene(root);

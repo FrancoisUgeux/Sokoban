@@ -16,19 +16,31 @@ import javafx.scene.shape.Rectangle;
 public class BoardFX extends GridPane {
 
     private final int BOARD_SIZE = 30;
+    private final Image wall;
+    private final Image sokoGoal;
+    private final Image box;
+    private final Image boxGoal;
+    private final Image floor;
+    private final Image goal;
+    private final Image player;
+//    private final Maze maze;
 
     public BoardFX(Maze maze) {
-//        Maze maze = new Maze();
-//        maze.chooseLevel(1);
+        this.goal = new Image("/esi/atl/g43335/sokoban/resources/goal.png");
+        this.floor = new Image("/esi/atl/g43335/sokoban/resources/floor.png");
+        this.boxGoal = new Image("/esi/atl/g43335/sokoban/resources/boxGoal.png");
+        this.box = new Image("/esi/atl/g43335/sokoban/resources/box.png");
+        this.sokoGoal = new Image("/esi/atl/g43335/sokoban/resources/Sokogoal.png");
+        this.wall = new Image("/esi/atl/g43335/sokoban/resources/wall.png");
+        this.player = new Image("/esi/atl/g43335/sokoban/resources/player.png");
+//        this.maze = maze;
+        maze.chooseLevel(42);
+        mazeBuilder(maze);
 //        this.setPrefSize(800, 800);
-        Image wall = new Image("/esi/atl/g43335/sokoban/resources/wall.png");
-        Image sokoGoal = new Image("/esi/atl/g43335/sokoban/resources/Sokogoal.png");
-        Image box = new Image("/esi/atl/g43335/sokoban/resources/box.png");
-        Image boxGoal = new Image("/esi/atl/g43335/sokoban/resources/boxGoal.png");
-        Image floor = new Image("/esi/atl/g43335/sokoban/resources/floor.png");
-        Image goal = new Image("/esi/atl/g43335/sokoban/resources/goal.png");
-        Image player = new Image("/esi/atl/g43335/sokoban/resources/player.png");
 
+    }
+
+    public void mazeBuilder(Maze maze) {
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
                 ItemType itemType = maze.getCell(new Position(i, j)).getItem().getType();
