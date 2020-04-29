@@ -82,10 +82,12 @@ public class BoardFX extends GridPane implements Observer {
                 GridPane.setColumnIndex(tile, j);
 
                 this.getChildren().add(tile);
-
-                this.maze = maze;
             }
         }
+    }
+
+    public void setMaze(Maze maze) {
+        this.maze = maze;
     }
 
     @Override

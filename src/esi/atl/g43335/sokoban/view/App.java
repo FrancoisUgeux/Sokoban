@@ -28,6 +28,7 @@ public class App extends Application {
     private Controller controller;
     StatsLeftFX statsLeft;
     BoardFX board;
+    PlayMenuFX playMenu;
 
 //    private BoardFX board;
     public App() {
@@ -110,7 +111,7 @@ public class App extends Application {
         HBox playBox = new HBox();
 //        playBox.setAlignment(Pos.BOTTOM_CENTER);
         borderPane.setBottom(playBox);
-        PlayMenuFX playMenu = new PlayMenuFX(game, board, statsLeft);
+        playMenu = new PlayMenuFX(game, board, statsLeft);
         playBox.getChildren().add(playMenu);
 
         Scene scene = new Scene(root);
@@ -136,9 +137,15 @@ public class App extends Application {
                         game.move(Direction.RIGHT);
                         break;
                 }
-                board.update();
+                board.setMaze(game.getMaze());
+                update();
             }
         });
+    }
+
+    public void update() {
+        board.update();
+        statsLeft.update();
     }
 
     private void addObservers() {

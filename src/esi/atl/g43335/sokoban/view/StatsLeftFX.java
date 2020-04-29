@@ -18,6 +18,7 @@ public class StatsLeftFX extends GridPane implements Observer {
     private final ChoiceBox levelSelect;
     private final Label nbMovesValue;
     private final Label goalsValue;
+    private final Label boxGoalValue;
     private final Game game;
     private final App app;
 
@@ -70,12 +71,22 @@ public class StatsLeftFX extends GridPane implements Observer {
         Label boxGoal = new Label("goals already filled: ");
         this.add(boxGoal, 1, 2);
 
-//        Label boxGoalValue = new Label(Integer.toString(game.getMaze().getNbGoals()));
-//        this.add(boxGoalValue, 1, 2);
+        boxGoalValue = new Label("0");
+        this.add(boxGoalValue, 2, 2);
+
         restart.setOnAction((t) -> {
             game.restart();
-            update();
-            app.getBoard().update();
+            app.update();
+        });
+
+        undo.setOnAction((t) -> {
+            game.undo();
+            app.update();
+        });
+
+        redo.setOnAction((t) -> {
+            game.redo();
+            app.update();
         });
     }
 
@@ -99,5 +110,7 @@ public class StatsLeftFX extends GridPane implements Observer {
     public void update() {
         nbMovesValue.setText(Integer.toString(game.getNbMoves()));
         goalsValue.setText(Integer.toString(game.getNbGoals()));
+        boxGoalValue.setText(Integer.toString(6 - (game.getNbGoals())));
+
     }
 }
