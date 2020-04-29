@@ -18,6 +18,7 @@ public class StatsRightFX extends GridPane {
         this.add(undoStack, 0, 0);
 
         Label redoStack = new Label("your lasts undo");
+        redoStack.setUnderline(true);
         this.add(redoStack, 1, 0);
     }
 }

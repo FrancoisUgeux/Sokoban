@@ -24,8 +24,8 @@ public class ControllerFX {
         maze = viewFX.getMaze();
     }
 
-    public void start() {
-        game.start(leftMenu.getLevelNb());
-        board.mazeBuilder(maze);
-    }
+//    public void start() {
+//        game.start(leftMenu.getLevelNb());
+//        board.mazeBuilder(maze);
+//    }
 }

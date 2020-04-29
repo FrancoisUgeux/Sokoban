@@ -15,13 +15,15 @@ import javafx.scene.layout.GridPane;
  */
 public class StatsLeftFX extends GridPane implements Observer {
 
-    private ChoiceBox levelSelect;
-    private Label nbMovesValue;
-    private Label goalsValue;
-    private Game game;
+    private final ChoiceBox levelSelect;
+    private final Label nbMovesValue;
+    private final Label goalsValue;
+    private final Game game;
+    private final App app;
 
-    public StatsLeftFX(Game game) {
+    public StatsLeftFX(Game game, App app) {
         this.game = game;
+        this.app = app;
 
         this.setHgap(10);
         this.setVgap(10);
@@ -70,6 +72,11 @@ public class StatsLeftFX extends GridPane implements Observer {
 
 //        Label boxGoalValue = new Label(Integer.toString(game.getMaze().getNbGoals()));
 //        this.add(boxGoalValue, 1, 2);
+        restart.setOnAction((t) -> {
+            game.restart();
+            update();
+            app.getBoard().update();
+        });
     }
 
     private String getLevelSelect() {
@@ -93,5 +100,4 @@ public class StatsLeftFX extends GridPane implements Observer {
         nbMovesValue.setText(Integer.toString(game.getNbMoves()));
         goalsValue.setText(Integer.toString(game.getNbGoals()));
     }
-
 }

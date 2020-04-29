@@ -1,13 +1,16 @@
 package esi.atl.g43335.sokoban.view;
 
 import esi.atl.g43335.sokoban.controller.Controller;
+import esi.atl.g43335.sokoban.model.Direction;
 import esi.atl.g43335.sokoban.model.Game;
 import esi.atl.g43335.sokoban.model.Maze;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -23,6 +26,8 @@ public class App extends Application {
     private Maze maze;
     private View view;
     private Controller controller;
+    StatsLeftFX statsLeft;
+    BoardFX board;
 
 //    private BoardFX board;
     public App() {
@@ -44,6 +49,14 @@ public class App extends Application {
 
     public Controller getController() {
         return controller;
+    }
+
+    public StatsLeftFX getStatsLeft() {
+        return statsLeft;
+    }
+
+    public BoardFX getBoard() {
+        return board;
     }
 
     public static void main(String[] args) {
@@ -79,12 +92,12 @@ public class App extends Application {
         borderPane.setLeft(stats1);
 //        root.getChildren().add(stats1);
         stats1.setPrefWidth(600);
-        StatsLeftFX statsLeft = new StatsLeftFX(game);
+        statsLeft = new StatsLeftFX(game, this);
         stats1.getChildren().add(statsLeft);
 
         HBox gameBoard = new HBox();
 //        gameBoard.setAlignment(Pos.CENTER);
-        BoardFX board = new BoardFX(maze);
+        board = new BoardFX(maze);
         borderPane.setCenter(gameBoard);
         gameBoard.getChildren().add(board);
 
@@ -103,5 +116,33 @@ public class App extends Application {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        addObservers();
+
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent key) {
+                switch (key.getCode()) {
+                    case Z:
+                        game.move(Direction.UP);
+                        break;
+                    case Q:
+                        game.move(Direction.LEFT);
+                        break;
+                    case S:
+                        game.move(Direction.DOWN);
+                        break;
+                    case D:
+                        game.move(Direction.RIGHT);
+                        break;
+                }
+                board.update();
+            }
+        });
+    }
+
+    private void addObservers() {
+        game.registerObserver(statsLeft);
+        game.registerObserver(board);
     }
 }
