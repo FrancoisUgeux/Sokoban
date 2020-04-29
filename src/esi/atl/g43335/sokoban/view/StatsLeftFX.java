@@ -91,7 +91,7 @@ public class StatsLeftFX extends GridPane implements Observer {
         });
 
         surrender.setOnAction((t) -> {
-            app.getBoard().setMaze(new Maze());
+//            app.getBoard().setMaze(new Maze());
 //            app.updates();
         });
     }

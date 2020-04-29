@@ -100,7 +100,7 @@ public class App extends Application {
 
         HBox gameBoard = new HBox();
 //        gameBoard.setAlignment(Pos.CENTER);
-        board = new BoardFX(maze);
+        board = new BoardFX(game);
         borderPane.setCenter(gameBoard);
         gameBoard.getChildren().add(board);
 
@@ -139,7 +139,7 @@ public class App extends Application {
                         game.move(Direction.RIGHT);
                         break;
                 }
-                board.setMaze(game.getMaze());
+//                board.setMaze(game.getMaze());
 //                updates();
             }
         });
@@ -157,6 +157,6 @@ public class App extends Application {
 
 //    @Override
 //    public void update() {
-//        board = new BoardFX(game.getMaze());
+//        board = new BoardFX(game);
 //    }
 }

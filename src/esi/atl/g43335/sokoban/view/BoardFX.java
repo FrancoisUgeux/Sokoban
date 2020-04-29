@@ -1,5 +1,6 @@
 package esi.atl.g43335.sokoban.view;
 
+import esi.atl.g43335.sokoban.model.Game;
 import esi.atl.g43335.sokoban.model.ItemType;
 import esi.atl.g43335.sokoban.model.Maze;
 import esi.atl.g43335.sokoban.model.Observer;
@@ -24,9 +25,10 @@ public class BoardFX extends GridPane implements Observer {
     private final Image floor;
     private final Image goal;
     private final Image player;
-    private Maze maze;
+//    private Maze maze;
+    private Game game;
 
-    public BoardFX(Maze maze) {
+    public BoardFX(Game game) {
         this.goal = new Image("/esi/atl/g43335/sokoban/resources/goal.png");
         this.floor = new Image("/esi/atl/g43335/sokoban/resources/floor.png");
         this.boxGoal = new Image("/esi/atl/g43335/sokoban/resources/boxGoal.png");
@@ -34,17 +36,19 @@ public class BoardFX extends GridPane implements Observer {
         this.sokoGoal = new Image("/esi/atl/g43335/sokoban/resources/Sokogoal.png");
         this.wall = new Image("/esi/atl/g43335/sokoban/resources/wall.png");
         this.player = new Image("/esi/atl/g43335/sokoban/resources/player.png");
-        this.maze = maze;
-        maze.chooseLevel(42);
-        mazeBuilder(maze);
+        this.game = game;
+        game.start(42);
+//        this.maze = game.getMaze();
+//        maze.chooseLevel(42);
+        mazeBuilder(game);
 //        this.setPrefSize(800, 800);
 
     }
 
-    public void mazeBuilder(Maze maze) {
+    public void mazeBuilder(Game game) {
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
-                ItemType itemType = maze.getCell(new Position(i, j)).getItem().getType();
+                ItemType itemType = game.getMaze().getCell(new Position(i, j)).getItem().getType();
                 Rectangle tile = new Rectangle(25, 25);
                 switch (itemType) {
                     case BOX:
@@ -86,13 +90,12 @@ public class BoardFX extends GridPane implements Observer {
         }
     }
 
-    public void setMaze(Maze maze) {
-        this.maze = maze;
-    }
-
+//    public void setMaze(Maze maze) {
+//        this.maze = maze;
+//    }
     @Override
     public void update() {
-        mazeBuilder(maze);
+        mazeBuilder(game);
 //        for (int i = 0; i < BOARD_SIZE; i++) {
 //            for (int j = 0; j < BOARD_SIZE; j++) {
 //                ItemType itemType = maze.getCell(new Position(i, j)).getItem().getType();
