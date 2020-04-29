@@ -92,47 +92,48 @@ public class BoardFX extends GridPane implements Observer {
 
     @Override
     public void update() {
-        for (int i = 0; i < BOARD_SIZE; i++) {
-            for (int j = 0; j < BOARD_SIZE; j++) {
-                ItemType itemType = maze.getCell(new Position(i, j)).getItem().getType();
-                Rectangle tile = new Rectangle(25, 25);
-                switch (itemType) {
-                    case BOX:
-                        ImagePattern imagePatternBox = new ImagePattern(box);
-                        tile.setFill(imagePatternBox);
-                        break;
-                    case BOXGOAL:
-                        ImagePattern imagePatternBoxGoal = new ImagePattern(boxGoal);
-                        tile.setFill(imagePatternBoxGoal);
-                        break;
-                    case FLOOR:
-                        ImagePattern imagePatternFloor = new ImagePattern(floor);
-                        tile.setFill(imagePatternFloor);
-                        break;
-                    case GOAL:
-                        ImagePattern imagePatternGoal = new ImagePattern(goal);
-                        tile.setFill(imagePatternGoal);
-                        break;
-                    case PLAYER:
-                        ImagePattern imagePatternPlayer = new ImagePattern(player);
-                        tile.setFill(imagePatternPlayer);
-                        break;
-                    case SOKOGOAL:
-                        ImagePattern imagePatternSokoGoal = new ImagePattern(sokoGoal);
-                        tile.setFill(imagePatternSokoGoal);
-                        break;
-                    case WALL:
-                        ImagePattern imagePatternWall = new ImagePattern(wall);
-                        tile.setFill(imagePatternWall);
-                        break;
-                }
-                tile.setStroke(Color.BLACK);
-
-                GridPane.setRowIndex(tile, i);
-                GridPane.setColumnIndex(tile, j);
-
-                this.getChildren().add(tile);
-            }
-        }
+        mazeBuilder(maze);
+//        for (int i = 0; i < BOARD_SIZE; i++) {
+//            for (int j = 0; j < BOARD_SIZE; j++) {
+//                ItemType itemType = maze.getCell(new Position(i, j)).getItem().getType();
+//                Rectangle tile = new Rectangle(25, 25);
+//                switch (itemType) {
+//                    case BOX:
+//                        ImagePattern imagePatternBox = new ImagePattern(box);
+//                        tile.setFill(imagePatternBox);
+//                        break;
+//                    case BOXGOAL:
+//                        ImagePattern imagePatternBoxGoal = new ImagePattern(boxGoal);
+//                        tile.setFill(imagePatternBoxGoal);
+//                        break;
+//                    case FLOOR:
+//                        ImagePattern imagePatternFloor = new ImagePattern(floor);
+//                        tile.setFill(imagePatternFloor);
+//                        break;
+//                    case GOAL:
+//                        ImagePattern imagePatternGoal = new ImagePattern(goal);
+//                        tile.setFill(imagePatternGoal);
+//                        break;
+//                    case PLAYER:
+//                        ImagePattern imagePatternPlayer = new ImagePattern(player);
+//                        tile.setFill(imagePatternPlayer);
+//                        break;
+//                    case SOKOGOAL:
+//                        ImagePattern imagePatternSokoGoal = new ImagePattern(sokoGoal);
+//                        tile.setFill(imagePatternSokoGoal);
+//                        break;
+//                    case WALL:
+//                        ImagePattern imagePatternWall = new ImagePattern(wall);
+//                        tile.setFill(imagePatternWall);
+//                        break;
+//                }
+//                tile.setStroke(Color.BLACK);
+//
+//                GridPane.setRowIndex(tile, i);
+//                GridPane.setColumnIndex(tile, j);
+//
+//                this.getChildren().add(tile);
+//            }
+//        }
     }
 }

@@ -85,11 +85,13 @@ public class moveCommandPB implements Command {
                 undoStartSokoGoal();
                 maze.put(new BoxGoal(), target);
                 maze.remove(target.next(dir));
+                maze.setNbGoals(--nbGoals);
                 break;
             case 2:
                 undoStartSokoGoal();
                 maze.put(new Box(), target);
                 maze.put(new Goal(), target.next(dir));
+                maze.setNbGoals(++nbGoals);
                 break;
             case 3:
                 undoStartSokoGoal();
@@ -113,6 +115,7 @@ public class moveCommandPB implements Command {
         maze.put(new Box(), target.next(dir));
         maze.put(new SokoGoal(), target);
         startSokoGoal();
+        maze.setNbGoals(++nbGoals);
         option.add(1);
     }
 

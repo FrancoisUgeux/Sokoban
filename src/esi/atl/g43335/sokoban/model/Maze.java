@@ -22,6 +22,7 @@ public class Maze {
     private final Cell[][] cells;
     private Position start;
     private int nbGoals;
+    private int maxNbGoals;
 
     /**
      * Build an empty board made of floor before calling a level builder to add
@@ -35,6 +36,10 @@ public class Maze {
                 cells[i][j] = new Cell();
             }
         }
+    }
+
+    public int getMaxNbGoals() {
+        return maxNbGoals;
     }
 
     public void chooseLevel(int level) {
@@ -62,6 +67,7 @@ public class Maze {
     void addGoal(Position pos) {
         cells[pos.getRow()][pos.getColumn()] = new Cell(new Goal());
         nbGoals++;
+        maxNbGoals++;
     }
 
     void addSoko(Position pos) {

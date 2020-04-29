@@ -6,7 +6,7 @@ import javafx.beans.Observable;
  *
  * @author franc
  */
-public interface Model extends Subject{
+public interface Model extends Subject {
 
     /**
      *
@@ -76,4 +76,5 @@ public interface Model extends Subject{
      * Redo the last command. so undo the last undo.
      */
     void redo();
+
 }

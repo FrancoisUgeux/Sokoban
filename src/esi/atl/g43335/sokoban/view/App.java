@@ -4,6 +4,7 @@ import esi.atl.g43335.sokoban.controller.Controller;
 import esi.atl.g43335.sokoban.model.Direction;
 import esi.atl.g43335.sokoban.model.Game;
 import esi.atl.g43335.sokoban.model.Maze;
+import esi.atl.g43335.sokoban.model.Observer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -29,6 +30,7 @@ public class App extends Application {
     StatsLeftFX statsLeft;
     BoardFX board;
     PlayMenuFX playMenu;
+    StatsRightFX statsRight;
 
 //    private BoardFX board;
     public App() {
@@ -105,7 +107,7 @@ public class App extends Application {
         HBox stats2 = new HBox();
 //        stats2.setAlignment(Pos.TOP_LEFT);
         borderPane.setRight(stats2);
-        StatsRightFX statsRight = new StatsRightFX();
+        statsRight = new StatsRightFX();
         stats2.getChildren().add(statsRight);
 
         HBox playBox = new HBox();
@@ -138,18 +140,23 @@ public class App extends Application {
                         break;
                 }
                 board.setMaze(game.getMaze());
-                update();
+//                updates();
             }
         });
     }
 
-    public void update() {
-        board.update();
-        statsLeft.update();
+//    public void updates() {
+//        board = new BoardFX(maze);
+//    }
+    private void addObservers() {
+//        game.registerObserver(this);
+        game.registerObserver(board);
+        game.registerObserver(statsLeft);
+        game.registerObserver(statsRight);
     }
 
-    private void addObservers() {
-        game.registerObserver(statsLeft);
-        game.registerObserver(board);
-    }
+//    @Override
+//    public void update() {
+//        board = new BoardFX(game.getMaze());
+//    }
 }

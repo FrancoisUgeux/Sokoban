@@ -1,6 +1,7 @@
 package esi.atl.g43335.sokoban.view;
 
 import esi.atl.g43335.sokoban.model.Game;
+import esi.atl.g43335.sokoban.model.Maze;
 import esi.atl.g43335.sokoban.model.Observer;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
@@ -19,11 +20,11 @@ public class StatsLeftFX extends GridPane implements Observer {
     private final Label nbMovesValue;
     private final Label goalsValue;
     private final Label boxGoalValue;
-    private final Game game;
+    private final Game myGame;
     private final App app;
 
     public StatsLeftFX(Game game, App app) {
-        this.game = game;
+        myGame = game;
         this.app = app;
 
         this.setHgap(10);
@@ -76,17 +77,22 @@ public class StatsLeftFX extends GridPane implements Observer {
 
         restart.setOnAction((t) -> {
             game.restart();
-            app.update();
+//            app.updates();
         });
 
         undo.setOnAction((t) -> {
             game.undo();
-            app.update();
+//            app.updates();
         });
 
         redo.setOnAction((t) -> {
             game.redo();
-            app.update();
+//            app.updates();
+        });
+
+        surrender.setOnAction((t) -> {
+            app.getBoard().setMaze(new Maze());
+//            app.updates();
         });
     }
 
@@ -108,9 +114,8 @@ public class StatsLeftFX extends GridPane implements Observer {
 
     @Override
     public void update() {
-        nbMovesValue.setText(Integer.toString(game.getNbMoves()));
-        goalsValue.setText(Integer.toString(game.getNbGoals()));
-        boxGoalValue.setText(Integer.toString(6 - (game.getNbGoals())));
-
+        nbMovesValue.setText(Integer.toString(myGame.getNbMoves()));
+        goalsValue.setText(Integer.toString(myGame.getNbGoals()));
+        boxGoalValue.setText(Integer.toString(myGame.getMaxNbGoals() - (myGame.getNbGoals())));
     }
 }

@@ -51,8 +51,20 @@ public class Game implements Model {
         return maze.getNbGoals();
     }
 
+    public int getMaxNbGoals() {
+        return maze.getMaxNbGoals();
+    }
+
     public void setNbMoves(int nbMoves) {
         this.nbMoves = nbMoves;
+    }
+
+    public Stack<Command> getUndoStack() {
+        return undoStack;
+    }
+
+    public Stack<Command> getRedoStack() {
+        return redoStack;
     }
 
     @Override
@@ -106,6 +118,7 @@ public class Game implements Model {
         maze.chooseLevel(level);
         currentLevel = level;
         sokoPos = maze.getStart();
+        notifyObservers();
     }
 
     @Override
@@ -120,9 +133,9 @@ public class Game implements Model {
 
     @Override
     public void restart() {
-        start(currentLevel);
         nbMoves = 0;
         undoStack.clear();
+        start(currentLevel);
     }
 
     @Override
@@ -153,6 +166,7 @@ public class Game implements Model {
             redoStack.clear();
             nbMoves++;
         }
+        notifyObservers();
     }
 
     @Override
@@ -164,12 +178,14 @@ public class Game implements Model {
     public void undo() {
         redoStack.push(undoStack.peek());
         undoStack.pop().unexecute();
+        notifyObservers();
     }
 
     @Override
     public void redo() {
         undoStack.push(redoStack.peek());
         redoStack.pop().execute();
+        notifyObservers();
     }
 
     public boolean undoStackEmpty() {
