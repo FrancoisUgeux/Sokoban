@@ -1,6 +1,7 @@
 package esi.atl.g43335.sokoban.view;
 
 import esi.atl.g43335.sokoban.controller.Controller;
+import esi.atl.g43335.sokoban.controller.ControllerFX;
 import esi.atl.g43335.sokoban.model.Direction;
 import esi.atl.g43335.sokoban.model.Game;
 import esi.atl.g43335.sokoban.model.Maze;
@@ -34,6 +35,7 @@ public class App extends Application {
     private StatsRightFX statsRight;
     private Scene scene;
     private Stage primaryStage;
+    private ControllerFX controller;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -45,25 +47,9 @@ public class App extends Application {
 
         initComponent();
         addObservers();
+        controller = new ControllerFX(game, scene);
+        controller.start();
 
-        scene.setOnKeyPressed((KeyEvent key) -> {
-            if (!game.isOver()) {
-                switch (key.getCode()) {
-                    case Z:
-                        game.move(Direction.UP);
-                        break;
-                    case Q:
-                        game.move(Direction.LEFT);
-                        break;
-                    case S:
-                        game.move(Direction.DOWN);
-                        break;
-                    case D:
-                        game.move(Direction.RIGHT);
-                        break;
-                }
-            }
-        });
     }
 
     private void initComponent() {

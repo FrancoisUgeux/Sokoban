@@ -16,5 +16,9 @@ public interface Command {
      */
     void unexecute();
 
+    /**
+     *
+     * @return a string saying what is the last move of Soko
+     */
     String getString();
 }

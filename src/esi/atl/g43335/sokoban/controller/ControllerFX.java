@@ -1,9 +1,9 @@
 package esi.atl.g43335.sokoban.controller;
 
+import esi.atl.g43335.sokoban.model.Direction;
 import esi.atl.g43335.sokoban.model.Model;
-import esi.atl.g43335.sokoban.view.App;
-import esi.atl.g43335.sokoban.view.BoardFX;
-import esi.atl.g43335.sokoban.view.StatsLeftFX;
+import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 
 /**
  *
@@ -12,17 +12,31 @@ import esi.atl.g43335.sokoban.view.StatsLeftFX;
 public class ControllerFX {
 
     private final Model game;
-    private final App viewFX;
-    private StatsLeftFX leftMenu;
-    private BoardFX board;
+    private final Scene scene;
 
-    public ControllerFX(Model game, App viewFX) {
+    public ControllerFX(Model game, Scene scene) {
         this.game = game;
-        this.viewFX = viewFX;
+        this.scene = scene;
     }
 
-//    public void start() {
-//        game.start(leftMenu.getLevelNb());
-//        board.mazeBuilder(maze);
-//    }
+    public void start() {
+        scene.setOnKeyPressed((KeyEvent key) -> {
+            if (!game.isOver()) {
+                switch (key.getCode()) {
+                    case Z:
+                        game.move(Direction.UP);
+                        break;
+                    case Q:
+                        game.move(Direction.LEFT);
+                        break;
+                    case S:
+                        game.move(Direction.DOWN);
+                        break;
+                    case D:
+                        game.move(Direction.RIGHT);
+                        break;
+                }
+            }
+        });
+    }
 }
