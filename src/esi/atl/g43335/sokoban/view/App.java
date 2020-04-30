@@ -23,61 +23,51 @@ import javafx.stage.Stage;
  */
 public class App extends Application {
 
-    private Game game;
-    private Maze maze;
-    private View view;
-    private Controller controller;
-    StatsLeftFX statsLeft;
-    BoardFX board;
-    PlayMenuFX playMenu;
-    StatsRightFX statsRight;
-
-//    private BoardFX board;
-    public App() {
-
-//        board = new BoardFX(maze);
-    }
-
-    public Game getGame() {
-        return game;
-    }
-
-    public Maze getMaze() {
-        return maze;
-    }
-
-    public View getView() {
-        return view;
-    }
-
-    public Controller getController() {
-        return controller;
-    }
-
-    public StatsLeftFX getStatsLeft() {
-        return statsLeft;
-    }
-
-    public BoardFX getBoard() {
-        return board;
-    }
-
     public static void main(String[] args) {
         Application.launch(args);
     }
 
+    private Game game;
+    private StatsLeftFX statsLeft;
+    private BoardFX board;
+    private PlayMenuFX playMenu;
+    private StatsRightFX statsRight;
+    private Scene scene;
+    private Stage primaryStage;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.game = new Game(0);
-        this.maze = new Maze();
-        this.view = new View();
-        this.controller = new Controller(game, view);
+        this.primaryStage = primaryStage;
 
         primaryStage.setTitle("Sokoban");
         primaryStage.setMaximized(true);
 
+        initComponent();
+        addObservers();
+
+        scene.setOnKeyPressed((KeyEvent key) -> {
+            if (!game.isOver()) {
+                switch (key.getCode()) {
+                    case Z:
+                        game.move(Direction.UP);
+                        break;
+                    case Q:
+                        game.move(Direction.LEFT);
+                        break;
+                    case S:
+                        game.move(Direction.DOWN);
+                        break;
+                    case D:
+                        game.move(Direction.RIGHT);
+                        break;
+                }
+            }
+        });
+    }
+
+    private void initComponent() {
         VBox root = new VBox();
-//        root.setAlignment(Pos.TOP_CENTER);
 
         MenuBar menuBar = new MenuBar();
         Menu menu = new Menu("Menu");
@@ -91,73 +81,35 @@ public class App extends Application {
         root.getChildren().add(borderPane);
 
         HBox stats1 = new HBox();
-//        stats1.setAlignment(Pos.CENTER_LEFT);
         borderPane.setLeft(stats1);
-//        root.getChildren().add(stats1);
-        stats1.setPrefWidth(600);
-        statsLeft = new StatsLeftFX(game, this);
+        stats1.setPrefWidth(585);
+        statsLeft = new StatsLeftFX(game);
         stats1.getChildren().add(statsLeft);
 
         HBox gameBoard = new HBox();
-//        gameBoard.setAlignment(Pos.CENTER);
         board = new BoardFX(game);
         borderPane.setCenter(gameBoard);
         gameBoard.getChildren().add(board);
 
         HBox stats2 = new HBox();
-//        stats2.setAlignment(Pos.TOP_LEFT);
+        stats2.setPrefWidth(585);
         borderPane.setRight(stats2);
         statsRight = new StatsRightFX(game);
         stats2.getChildren().add(statsRight);
 
         HBox playBox = new HBox();
-//        playBox.setAlignment(Pos.BOTTOM_CENTER);
         borderPane.setBottom(playBox);
-        playMenu = new PlayMenuFX(game, board, statsLeft);
+        playMenu = new PlayMenuFX(game, statsLeft);
         playBox.getChildren().add(playMenu);
 
-        Scene scene = new Scene(root);
+        scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
-
-        addObservers();
-
-        scene.setOnKeyPressed((KeyEvent key) -> {
-            switch (key.getCode()) {
-                case Z:
-//                    statsRight.clear();
-                    game.move(Direction.UP);
-                    break;
-                case Q:
-//                    statsRight.clear();
-                    game.move(Direction.LEFT);
-                    break;
-                case S:
-//                    statsRight.clear();
-                    game.move(Direction.DOWN);
-                    break;
-                case D:
-//                    statsRight.clear();
-                    game.move(Direction.RIGHT);
-                    break;
-            }
-//                board.setMaze(game.getMaze());
-//                updates();
-        });
     }
 
-//    public void updates() {
-//        board = new BoardFX(maze);
-//    }
     private void addObservers() {
-//        game.registerObserver(this);
         game.registerObserver(board);
         game.registerObserver(statsLeft);
         game.registerObserver(statsRight);
     }
-
-//    @Override
-//    public void update() {
-//        board = new BoardFX(game);
-//    }
 }

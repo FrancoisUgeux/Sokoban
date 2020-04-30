@@ -21,6 +21,7 @@ public class Game implements Model {
     private final Stack<Command> undoStack;
     private final Stack<Command> redoStack;
     private final List<Observer> observers;
+    private final int MAX_STACK_SIZE = 40;
 
     /**
      *
@@ -155,14 +156,18 @@ public class Game implements Model {
         if (maze.isFree(target) || (maze.isGoal(target) && !maze.isBoxGoal(target))) {
             Command command = new moveCommand(maze, sokoPos, target, item, nbMoves, this);
             command.execute();
-            undoStack.push(command);
+            if (undoStack.size() <= MAX_STACK_SIZE) {
+                undoStack.push(command);
+            }
             redoStack.clear();
             nbMoves++;
         } else if (canMove(target, dir) && maze.getCell(target).getItem().
                 getType() != ItemType.WALL) {
             Command command = new moveCommandPB(maze, sokoPos, target, item, dir, nbMoves, this);
             command.execute();
-            undoStack.push(command);
+            if (undoStack.size() <= MAX_STACK_SIZE) {
+                undoStack.push(command);
+            }
             redoStack.clear();
             nbMoves++;
         }
@@ -176,14 +181,18 @@ public class Game implements Model {
 
     @Override
     public void undo() {
-        redoStack.push(undoStack.peek());
+        if (redoStack.size() <= MAX_STACK_SIZE) {
+            redoStack.push(undoStack.peek());
+        }
         undoStack.pop().unexecute();
         notifyObservers();
     }
 
     @Override
     public void redo() {
-        undoStack.push(redoStack.peek());
+        if (undoStack.size() <= MAX_STACK_SIZE) {
+            undoStack.push(redoStack.peek());
+        }
         redoStack.pop().execute();
         notifyObservers();
     }

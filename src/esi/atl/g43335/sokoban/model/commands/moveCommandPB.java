@@ -2,7 +2,6 @@ package esi.atl.g43335.sokoban.model.commands;
 
 import esi.atl.g43335.sokoban.model.*;
 import esi.atl.g43335.sokoban.model.items.*;
-import java.util.ArrayList;
 
 /**
  *
@@ -21,7 +20,6 @@ public class moveCommandPB implements Command {
     private final Direction dir;
     private int nbMoves;
     private int nbGoals;
-//    private final ArrayList<Integer> option = new ArrayList();
     private int option;
     private String string;
 
@@ -78,8 +76,6 @@ public class moveCommandPB implements Command {
      */
     @Override
     public void unexecute() {
-//        int last = option.size() - 1;
-//        switch (option.get(last)) {
         switch (option) {
 
             case 0:
@@ -106,7 +102,6 @@ public class moveCommandPB implements Command {
                 break;
         }
         maze.setStart(start);
-//        option.remove(last);
         game.setNbMoves(--nbMoves);
     }
 
@@ -114,7 +109,6 @@ public class moveCommandPB implements Command {
         maze.put(new BoxGoal(), target.next(dir));
         maze.put(new SokoGoal(), target);
         startSokoGoal();
-//        option.add(0);
         option = 0;
     }
 
@@ -123,7 +117,6 @@ public class moveCommandPB implements Command {
         maze.put(new SokoGoal(), target);
         startSokoGoal();
         maze.setNbGoals(++nbGoals);
-//        option.add(1);
         option = 1;
     }
 
@@ -132,7 +125,6 @@ public class moveCommandPB implements Command {
         maze.put(new Player(), target);
         maze.setNbGoals(--nbGoals);
         startSokoGoal();
-//        option.add(2);
         option = 2;
     }
 
@@ -140,7 +132,6 @@ public class moveCommandPB implements Command {
         maze.put(new Box(), target.next(dir));
         maze.put(new Player(), target);
         startSokoGoal();
-//        option.add(3);
         option = 3;
     }
 

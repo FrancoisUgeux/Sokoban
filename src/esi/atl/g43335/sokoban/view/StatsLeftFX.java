@@ -15,39 +15,50 @@ import javafx.scene.layout.GridPane;
  */
 public class StatsLeftFX extends GridPane implements Observer {
 
-    private final ChoiceBox levelSelect;
-    private final Label nbMovesValue;
-    private final Label goalsValue;
-    private final Label boxGoalValue;
+    private ChoiceBox levelSelect;
+    private Label nbMovesValue;
+    private Label goalsValue;
+    private Label boxGoalValue;
     private final Game myGame;
+    private Button restart;
+    private Button undo;
+    private Button redo;
+    private Button surrender;
 
-    public StatsLeftFX(Game game, App app) {
+    public StatsLeftFX(Game game) {
         myGame = game;
 
         this.setHgap(10);
         this.setVgap(10);
+
+        initComponent();
+        initAction();
+
+    }
+
+    private void initComponent() {
         levelSelect = new ChoiceBox();
         levelSelect.setItems(FXCollections.observableArrayList("Level one",
                 "Test level"));
         levelSelect.setValue("Level one");
         this.add(levelSelect, 0, 0);
 
-        Button restart = new Button();
+        restart = new Button();
         restart.setText("restart");
         restart.setPadding(new Insets(5));
         this.add(restart, 0, 1);
 
-        Button undo = new Button();
+        undo = new Button();
         undo.setText("undo");
         undo.setPadding(new Insets(5));
         this.add(undo, 0, 2);
 
-        Button redo = new Button();
+        redo = new Button();
         redo.setText("redo");
         redo.setPadding(new Insets(5));
         this.add(redo, 0, 3);
 
-        Button surrender = new Button();
+        surrender = new Button();
         surrender.setText("surrender");
         surrender.setPadding(new Insets(5));
         this.add(surrender, 0, 4);
@@ -64,32 +75,31 @@ public class StatsLeftFX extends GridPane implements Observer {
         goalsValue = new Label("0");
         this.add(goalsValue, 2, 1);
 
-//        Label goalsValue = new Label(Integer.toString(game.getMaze().getNbGoals()));
-//        this.add(goalsValue, 1, 2);
         Label boxGoal = new Label("goals already filled: ");
         this.add(boxGoal, 1, 2);
 
         boxGoalValue = new Label("0");
         this.add(boxGoalValue, 2, 2);
+    }
 
+    private void initAction() {
         restart.setOnAction((t) -> {
-            game.restart();
-//            app.updates();
+            myGame.restart();
         });
 
         undo.setOnAction((t) -> {
-            game.undo();
-//            app.updates();
+            if (!myGame.getUndoStack().empty()) {
+                myGame.undo();
+            }
         });
 
         redo.setOnAction((t) -> {
-            game.redo();
-//            app.updates();
+            if (!myGame.getRedoStack().empty()) {
+                myGame.redo();
+            }
         });
 
         surrender.setOnAction((t) -> {
-//            app.getBoard().setMaze(new Maze());
-//            app.updates();
         });
     }
 

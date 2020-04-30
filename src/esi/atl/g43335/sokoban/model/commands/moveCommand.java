@@ -27,7 +27,6 @@ public class moveCommand implements Command {
     private final Item item;
     private int nbMoves;
     private String string;
-//    private final ArrayList<Integer> option = new ArrayList();
     private int option;
 
     /**
@@ -37,6 +36,7 @@ public class moveCommand implements Command {
      * @param target The place soko want to move on.
      * @param item Soko.
      * @param nbMoves The number of moves already made by soko.
+     * @param game
      */
     public moveCommand(Maze maze, Position start, Position target,
             Item item, int nbMoves, Game game) {
@@ -60,22 +60,18 @@ public class moveCommand implements Command {
             maze.put(item, target);
             maze.remove(start);
             option = 0;
-//            option.add(0);
         } else if (maze.isFree(target) && maze.isSokoGoal(start)) {
             maze.put(new Player(), target);
             maze.put(new Goal(), start);
             option = 1;
-//            option.add(1);
         } else if (maze.isGoal(target) && maze.isSokoGoal(start)) {
             maze.put(new SokoGoal(), target);
             maze.put(new Goal(), start);
             option = 2;
-//            option.add(2);
         } else {
             maze.put(new SokoGoal(), target);
             maze.remove(start);
             option = 3;
-//            option.add(3);
         }
         sokoMove();
         maze.setStart(target);
@@ -86,8 +82,6 @@ public class moveCommand implements Command {
      */
     @Override
     public void unexecute() {
-//        int last = option.size() - 1;
-//        switch (option.get(last)) {
         switch (option) {
             case 0:
                 maze.put(item, start);
@@ -105,11 +99,11 @@ public class moveCommand implements Command {
                 maze.put(new Goal(), target);
                 break;
         }
-//        option.remove(last);
         maze.setStart(start);
         game.setNbMoves(--nbMoves);
     }
 
+    @Override
     public String getString() {
         return string;
     }

@@ -12,38 +12,48 @@ import javafx.scene.layout.GridPane;
  */
 public class PlayMenuFX extends GridPane {
 
-    public PlayMenuFX(Game game, BoardFX board, StatsLeftFX leftMenu) {
-        Label filler = new Label(" ");
-        filler.setPrefWidth(600);
-        this.add(filler, 0, 0);
+    private Label fillerLeft;
+    private Label fillerRight;
+    private Button playBt;
+    private Button nextLevelBt;
+    private final Game game;
+    private final StatsLeftFX leftMenu;
 
-        Button playBt = new Button();
+    public PlayMenuFX(Game game, StatsLeftFX leftMenu) {
+
+        this.game = game;
+        this.leftMenu = leftMenu;
+        initComponent();
+        initAction();
+    }
+
+    private void initComponent() {
+        fillerLeft = new Label(" ");
+        fillerLeft.setPrefWidth(585);
+        this.add(fillerLeft, 0, 0);
+
+        fillerRight = new Label(" ");
+        fillerRight.setPrefWidth(585);
+        this.add(fillerRight, 2, 0);
+
+        playBt = new Button();
         playBt.setText("Play !");
         this.add(playBt, 1, 0);
 
-        Button leftBt = new Button();
-        leftBt.setText("<-");
-        this.add(leftBt, 2, 1);
+        nextLevelBt = new Button();
+        nextLevelBt.setText("Next level");
+        this.add(nextLevelBt, 2, 0);
+    }
 
-        Button rightBt = new Button();
-        rightBt.setText("->");
-        this.add(rightBt, 4, 1);
-
-        Button upBt = new Button();
-        upBt.setText("^");
-        this.add(upBt, 3, 0);
-
-        Button downBt = new Button();
-        downBt.setText("down");
-        this.add(downBt, 3, 2);
-
+    private void initAction() {
         playBt.setOnAction((ActionEvent event) -> {
             game.start(leftMenu.getLevelNb());
-//            board.setMaze(game.getMaze());
-//            game.notifyObservers();
-//            board.update();
         });
-        {
-        }
+
+        nextLevelBt.setOnAction((t) -> {
+            if (game.getCurrentLevel() < 1) {
+                game.nextLevel();
+            }
+        });
     }
 }
