@@ -40,7 +40,7 @@ public class PlayMenuFX extends GridPane {
         playBt.setOnAction((ActionEvent event) -> {
             game.start(leftMenu.getLevelNb());
 //            board.setMaze(game.getMaze());
-            game.notifyObservers();
+//            game.notifyObservers();
 //            board.update();
         });
         {

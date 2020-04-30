@@ -1,7 +1,6 @@
 package esi.atl.g43335.sokoban.view;
 
 import esi.atl.g43335.sokoban.model.Game;
-import esi.atl.g43335.sokoban.model.Maze;
 import esi.atl.g43335.sokoban.model.Observer;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
@@ -21,11 +20,9 @@ public class StatsLeftFX extends GridPane implements Observer {
     private final Label goalsValue;
     private final Label boxGoalValue;
     private final Game myGame;
-    private final App app;
 
     public StatsLeftFX(Game game, App app) {
         myGame = game;
-        this.app = app;
 
         this.setHgap(10);
         this.setVgap(10);

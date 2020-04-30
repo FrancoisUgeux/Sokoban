@@ -15,4 +15,6 @@ public interface Command {
      * Undo the last command.
      */
     void unexecute();
+
+    String getString();
 }

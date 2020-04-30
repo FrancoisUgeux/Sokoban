@@ -1,6 +1,7 @@
 package esi.atl.g43335.sokoban.model.commands;
 
 import esi.atl.g43335.sokoban.model.Command;
+import esi.atl.g43335.sokoban.model.Direction;
 import esi.atl.g43335.sokoban.model.Game;
 import esi.atl.g43335.sokoban.model.Item;
 import esi.atl.g43335.sokoban.model.Maze;
@@ -19,13 +20,15 @@ import java.util.ArrayList;
  */
 public class moveCommand implements Command {
 
-    private Game game;
-    private Maze maze;
-    private Position start;
-    private Position target;
-    private Item item;
+    private final Game game;
+    private final Maze maze;
+    private final Position start;
+    private final Position target;
+    private final Item item;
     private int nbMoves;
-    private ArrayList<Integer> option = new ArrayList();
+    private String string;
+//    private final ArrayList<Integer> option = new ArrayList();
+    private int option;
 
     /**
      *
@@ -56,20 +59,25 @@ public class moveCommand implements Command {
         if (maze.isFree(target) && !maze.isSokoGoal(start)) {
             maze.put(item, target);
             maze.remove(start);
-            option.add(0);
+            option = 0;
+//            option.add(0);
         } else if (maze.isFree(target) && maze.isSokoGoal(start)) {
             maze.put(new Player(), target);
             maze.put(new Goal(), start);
-            option.add(1);
+            option = 1;
+//            option.add(1);
         } else if (maze.isGoal(target) && maze.isSokoGoal(start)) {
             maze.put(new SokoGoal(), target);
             maze.put(new Goal(), start);
-            option.add(2);
+            option = 2;
+//            option.add(2);
         } else {
             maze.put(new SokoGoal(), target);
             maze.remove(start);
-            option.add(3);
+            option = 3;
+//            option.add(3);
         }
+        sokoMove();
         maze.setStart(target);
     }
 
@@ -78,8 +86,9 @@ public class moveCommand implements Command {
      */
     @Override
     public void unexecute() {
-        int last = option.size() - 1;
-        switch (option.get(last)) {
+//        int last = option.size() - 1;
+//        switch (option.get(last)) {
+        switch (option) {
             case 0:
                 maze.put(item, start);
                 maze.remove(target);
@@ -96,8 +105,25 @@ public class moveCommand implements Command {
                 maze.put(new Goal(), target);
                 break;
         }
-        option.remove(last);
+//        option.remove(last);
         maze.setStart(start);
         game.setNbMoves(--nbMoves);
     }
+
+    public String getString() {
+        return string;
+    }
+
+    private void sokoMove() {
+        if (start.getColumn() > target.getColumn()) {
+            string = "soko moving left";
+        } else if (start.getColumn() < target.getColumn()) {
+            string = "soko moving right";
+        } else if (start.getRow() > target.getRow()) {
+            string = "soko moving up";
+        } else {
+            string = "soko moving down";
+        }
+    }
+
 }

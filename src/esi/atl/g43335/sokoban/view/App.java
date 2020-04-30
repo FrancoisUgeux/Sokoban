@@ -107,7 +107,7 @@ public class App extends Application {
         HBox stats2 = new HBox();
 //        stats2.setAlignment(Pos.TOP_LEFT);
         borderPane.setRight(stats2);
-        statsRight = new StatsRightFX();
+        statsRight = new StatsRightFX(game);
         stats2.getChildren().add(statsRight);
 
         HBox playBox = new HBox();
@@ -122,26 +122,27 @@ public class App extends Application {
 
         addObservers();
 
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent key) {
-                switch (key.getCode()) {
-                    case Z:
-                        game.move(Direction.UP);
-                        break;
-                    case Q:
-                        game.move(Direction.LEFT);
-                        break;
-                    case S:
-                        game.move(Direction.DOWN);
-                        break;
-                    case D:
-                        game.move(Direction.RIGHT);
-                        break;
-                }
+        scene.setOnKeyPressed((KeyEvent key) -> {
+            switch (key.getCode()) {
+                case Z:
+//                    statsRight.clear();
+                    game.move(Direction.UP);
+                    break;
+                case Q:
+//                    statsRight.clear();
+                    game.move(Direction.LEFT);
+                    break;
+                case S:
+//                    statsRight.clear();
+                    game.move(Direction.DOWN);
+                    break;
+                case D:
+//                    statsRight.clear();
+                    game.move(Direction.RIGHT);
+                    break;
+            }
 //                board.setMaze(game.getMaze());
 //                updates();
-            }
         });
     }
 

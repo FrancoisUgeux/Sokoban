@@ -13,15 +13,17 @@ import java.util.ArrayList;
  */
 public class moveCommandPB implements Command {
 
-    private Game game;
-    private Maze maze;
-    private Position start;
-    private Position target;
-    private Item item;
-    private Direction dir;
+    private final Game game;
+    private final Maze maze;
+    private final Position start;
+    private final Position target;
+    private final Item item;
+    private final Direction dir;
     private int nbMoves;
     private int nbGoals;
-    private ArrayList<Integer> option = new ArrayList();
+//    private final ArrayList<Integer> option = new ArrayList();
+    private int option;
+    private String string;
 
     /**
      *
@@ -31,6 +33,7 @@ public class moveCommandPB implements Command {
      * @param item Soko.
      * @param dir The direction in which Soko want to move.
      * @param nbMoves The number of moves already made by Soko
+     * @param game
      */
     public moveCommandPB(Maze maze, Position start, Position target,
             Item item, Direction dir, int nbMoves, Game game) {
@@ -66,6 +69,7 @@ public class moveCommandPB implements Command {
                 boxToFloor();
             }
         }
+        sokoMove();
         maze.setStart(target);
     }
 
@@ -74,8 +78,10 @@ public class moveCommandPB implements Command {
      */
     @Override
     public void unexecute() {
-        int last = option.size() - 1;
-        switch (option.get(last)) {
+//        int last = option.size() - 1;
+//        switch (option.get(last)) {
+        switch (option) {
+
             case 0:
                 undoStartSokoGoal();
                 maze.put(new BoxGoal(), target);
@@ -100,7 +106,7 @@ public class moveCommandPB implements Command {
                 break;
         }
         maze.setStart(start);
-        option.remove(last);
+//        option.remove(last);
         game.setNbMoves(--nbMoves);
     }
 
@@ -108,7 +114,8 @@ public class moveCommandPB implements Command {
         maze.put(new BoxGoal(), target.next(dir));
         maze.put(new SokoGoal(), target);
         startSokoGoal();
-        option.add(0);
+//        option.add(0);
+        option = 0;
     }
 
     private void boxGoalToFloor() {
@@ -116,7 +123,8 @@ public class moveCommandPB implements Command {
         maze.put(new SokoGoal(), target);
         startSokoGoal();
         maze.setNbGoals(++nbGoals);
-        option.add(1);
+//        option.add(1);
+        option = 1;
     }
 
     private void boxToGoal() {
@@ -124,14 +132,16 @@ public class moveCommandPB implements Command {
         maze.put(new Player(), target);
         maze.setNbGoals(--nbGoals);
         startSokoGoal();
-        option.add(2);
+//        option.add(2);
+        option = 2;
     }
 
     private void boxToFloor() {
         maze.put(new Box(), target.next(dir));
         maze.put(new Player(), target);
         startSokoGoal();
-        option.add(3);
+//        option.add(3);
+        option = 3;
     }
 
     private void startSokoGoal() {
@@ -147,6 +157,23 @@ public class moveCommandPB implements Command {
             maze.put(new SokoGoal(), start);
         } else {
             maze.put(new Player(), start);
+        }
+    }
+
+    @Override
+    public String getString() {
+        return string;
+    }
+
+    private void sokoMove() {
+        if (start.getColumn() > target.getColumn()) {
+            string = "soko pushing box on left";
+        } else if (start.getColumn() < target.getColumn()) {
+            string = "soko pushing box on right";
+        } else if (start.getRow() > target.getRow()) {
+            string = "soko pushing box up";
+        } else {
+            string = "soko pushing box down";
         }
     }
 }
