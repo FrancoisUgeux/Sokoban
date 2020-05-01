@@ -36,6 +36,7 @@ public class App extends Application {
     private Scene scene;
     private Stage primaryStage;
     private ControllerFX controller;
+    private MenuItem exit;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -46,6 +47,7 @@ public class App extends Application {
         primaryStage.setMaximized(true);
 
         initComponent();
+        initAction();
         addObservers();
         controller = new ControllerFX(game, scene);
         controller.start();
@@ -57,7 +59,7 @@ public class App extends Application {
 
         MenuBar menuBar = new MenuBar();
         Menu menu = new Menu("Menu");
-        MenuItem exit = new MenuItem("Exit");
+        exit = new MenuItem("Exit");
         menu.getItems().add(exit);
 
         menuBar.getMenus().add(menu);
@@ -91,6 +93,12 @@ public class App extends Application {
         scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    private void initAction() {
+        exit.setOnAction((t) -> {
+            System.exit(0);
+        });
     }
 
     private void addObservers() {

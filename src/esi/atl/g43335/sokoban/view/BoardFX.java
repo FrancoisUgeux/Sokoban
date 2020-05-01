@@ -25,7 +25,7 @@ public class BoardFX extends GridPane implements Observer {
     private final Image goal;
     private final Image player;
     private final Image endLevel;
-    private Game game;
+    private final Game game;
 
     public BoardFX(Game game) {
         this.goal = new Image("/esi/atl/g43335/sokoban/resources/goal.png");
