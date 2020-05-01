@@ -1,20 +1,14 @@
 package esi.atl.g43335.sokoban.view;
 
-import esi.atl.g43335.sokoban.controller.Controller;
 import esi.atl.g43335.sokoban.controller.ControllerFX;
-import esi.atl.g43335.sokoban.model.Direction;
 import esi.atl.g43335.sokoban.model.Game;
-import esi.atl.g43335.sokoban.model.Maze;
-import esi.atl.g43335.sokoban.model.Observer;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -74,6 +68,7 @@ public class App extends Application {
         borderPane.setLeft(stats1);
         stats1.setPrefWidth(585);
         statsLeft = new StatsLeftFX(game);
+        stats1.getStyleClass().add("hbox");
         stats1.getChildren().add(statsLeft);
 
         HBox gameBoard = new HBox();
@@ -83,6 +78,7 @@ public class App extends Application {
 
         HBox stats2 = new HBox();
         stats2.setPrefWidth(585);
+        stats2.getStyleClass().add("hbox");
         borderPane.setRight(stats2);
         statsRight = new StatsRightFX(game);
         stats2.getChildren().add(statsRight);

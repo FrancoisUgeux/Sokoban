@@ -1,5 +1,4 @@
 .button{
-    -fx-border-top: 1px solid #3c3c3c;
     -fx-background-color : #d9944e;
 }
 
@@ -33,5 +32,9 @@
 
 .choice-box.menu-item:focused > *{
     -fx-text-fill: white;
+}
+
+.hbox{
+    -fx-background-color: gray;
 }
 

@@ -20,7 +20,6 @@ public class PlayMenuFX extends GridPane {
     private final StatsLeftFX leftMenu;
 
     public PlayMenuFX(Game game, StatsLeftFX leftMenu) {
-
         this.game = game;
         this.leftMenu = leftMenu;
         initComponent();
@@ -30,11 +29,15 @@ public class PlayMenuFX extends GridPane {
     private void initComponent() {
         fillerLeft = new Label(" ");
         fillerLeft.setPrefWidth(585);
+        fillerLeft.setPrefHeight(140);
+        fillerLeft.getStyleClass().add("hbox");
         this.add(fillerLeft, 0, 0);
 
         fillerRight = new Label(" ");
         fillerRight.setPrefWidth(585);
-        this.add(fillerRight, 2, 0);
+        fillerRight.setPrefHeight(140);
+        fillerRight.getStyleClass().add("hbox");
+        this.add(fillerRight, 3, 0);
 
         playBt = new Button();
         playBt.setText("Play !");
