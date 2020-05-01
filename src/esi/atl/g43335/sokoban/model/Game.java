@@ -160,7 +160,7 @@ public class Game implements Model {
             redoStack.clear();
             nbMoves++;
         } else if (canMove(target, dir) && maze.getCell(target).getItem().
-                getType() != ItemType.WALL) {
+                getType() != ItemType.WALL && !maze.isBoxGoal(target.next(dir))) {
             Command command = new moveCommandPB(maze, sokoPos, target, item, dir, nbMoves, this);
             command.execute();
             fillUndoStackCommand(command);

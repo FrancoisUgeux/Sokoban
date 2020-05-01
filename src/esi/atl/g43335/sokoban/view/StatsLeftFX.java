@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 
 /**
  *
@@ -41,26 +42,35 @@ public class StatsLeftFX extends GridPane implements Observer {
         levelSelect.setItems(FXCollections.observableArrayList("Level one",
                 "Test level"));
         levelSelect.setValue("Level one");
+        levelSelect.setMinSize(250, 70);
         this.add(levelSelect, 0, 0);
 
         restart = new Button();
         restart.setText("restart");
-        restart.setPadding(new Insets(5));
+//        restart.setPadding(new Insets(5));
+        restart.setMinSize(250, 70);
+        restart.setFont(Font.font(40));
         this.add(restart, 0, 1);
 
         undo = new Button();
         undo.setText("undo");
         undo.setPadding(new Insets(5));
+        undo.setMinSize(250, 70);
+        undo.setFont(Font.font(40));
         this.add(undo, 0, 2);
 
         redo = new Button();
         redo.setText("redo");
         redo.setPadding(new Insets(5));
+        redo.setMinSize(250, 70);
+        redo.setFont(Font.font(40));
         this.add(redo, 0, 3);
 
         surrender = new Button();
         surrender.setText("surrender");
         surrender.setPadding(new Insets(5));
+        surrender.setMinSize(250, 70);
+        surrender.setFont(Font.font(40));
         this.add(surrender, 0, 4);
 
         Label nbMoves = new Label("Your moves :");

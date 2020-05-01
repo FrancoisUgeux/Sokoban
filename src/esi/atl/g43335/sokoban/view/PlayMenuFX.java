@@ -38,10 +38,12 @@ public class PlayMenuFX extends GridPane {
 
         playBt = new Button();
         playBt.setText("Play !");
+        playBt.setMinSize(375, 140);
         this.add(playBt, 1, 0);
 
         nextLevelBt = new Button();
         nextLevelBt.setText("Next level");
+        nextLevelBt.setMinSize(375, 140);
         this.add(nextLevelBt, 2, 0);
     }
 

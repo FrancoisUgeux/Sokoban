@@ -1,0 +1,37 @@
+.button{
+    -fx-border-top: 1px solid #3c3c3c;
+    -fx-background-color : #d9944e;
+}
+
+.button:hover {
+    -fx-border-top-color: #2ecc70;
+    -fx-background-color: #2ecc70;
+    color: #3c3c3c;
+}
+
+.button:active {
+    -fx-border-top-color: #1b435e;
+    -fx-background: #CD4334;
+}
+
+.choice-box{
+    -fx-background-color: #d9944e;
+    -fx-mark-color: #2ecc70;
+}
+
+.choice-box.context-menu{
+    -fx-background-color: #d9944e;
+}
+
+.choice-box.menu-item:focused{
+    -fx-background-color: #2ecc70;
+}
+
+.choice-box.menu-item > *{
+    -fx-text-fill:#3c3c3c
+}
+
+.choice-box.menu-item:focused > *{
+    -fx-text-fill: white;
+}
+

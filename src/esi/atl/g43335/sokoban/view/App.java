@@ -12,6 +12,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -90,7 +92,12 @@ public class App extends Application {
         playMenu = new PlayMenuFX(game, statsLeft);
         playBox.getChildren().add(playMenu);
 
+        ImageView banner = new ImageView();
+        banner.setImage(new Image("/esi/atl/g43335/sokoban/resources/banner.png", 1920, 140, false, false));
+        borderPane.setTop(banner);
+
         scene = new Scene(root);
+        scene.getStylesheets().add("/esi/atl/g43335/sokoban/view/css/style.css");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
