@@ -25,6 +25,7 @@ public class StatsLeftFX extends GridPane implements Observer {
     private Button undo;
     private Button redo;
     private Button surrender;
+    private final int DEFAULT_LVL = 42;
 
     public StatsLeftFX(Game game) {
         myGame = game;
@@ -47,7 +48,6 @@ public class StatsLeftFX extends GridPane implements Observer {
 
         restart = new Button();
         restart.setText("restart");
-//        restart.setPadding(new Insets(5));
         restart.setMinSize(250, 70);
         restart.setFont(Font.font(40));
         this.add(restart, 0, 1);
@@ -100,7 +100,9 @@ public class StatsLeftFX extends GridPane implements Observer {
 
     private void initAction() {
         restart.setOnAction((t) -> {
-            myGame.restart();
+            if (myGame.getNbMoves() > 0) {
+                myGame.restart();
+            }
         });
 
         undo.setOnAction((t) -> {
@@ -116,6 +118,7 @@ public class StatsLeftFX extends GridPane implements Observer {
         });
 
         surrender.setOnAction((t) -> {
+            myGame.setSurrend();
         });
     }
 
@@ -131,7 +134,7 @@ public class StatsLeftFX extends GridPane implements Observer {
             case "Test level":
                 return 0;
             default:
-                return 42;
+                return DEFAULT_LVL;
         }
     }
 

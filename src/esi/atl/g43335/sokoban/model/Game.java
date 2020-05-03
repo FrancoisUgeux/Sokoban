@@ -21,7 +21,7 @@ public class Game implements Model {
     private final Stack<Command> undoStack;
     private final Stack<Command> redoStack;
     private final List<Observer> observers;
-    private final int MAX_STACK_SIZE = 40;
+    private boolean surrend;
 
     /**
      *
@@ -32,6 +32,7 @@ public class Game implements Model {
         undoStack = new Stack<>();
         redoStack = new Stack<>();
         this.observers = new ArrayList<>();
+        surrend = false;
     }
 
     @Override
@@ -66,6 +67,16 @@ public class Game implements Model {
 
     public Stack<Command> getRedoStack() {
         return redoStack;
+    }
+
+    @Override
+    public boolean isSurrend() {
+        return surrend;
+    }
+
+    public void setSurrend() {
+        surrend = true;
+        notifyObservers();
     }
 
     @Override
@@ -116,6 +127,7 @@ public class Game implements Model {
     @Override
     public void start(int level) {
         nbMoves = 0;
+        surrend = false;
         maze = new Maze();
         maze.chooseLevel(level);
         currentLevel = level;

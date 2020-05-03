@@ -25,6 +25,7 @@ public class BoardFX extends GridPane implements Observer {
     private final Image goal;
     private final Image player;
     private final Image endLevel;
+    private final Image surrend;
     private final Game game;
 
     public BoardFX(Game game) {
@@ -36,6 +37,7 @@ public class BoardFX extends GridPane implements Observer {
         this.wall = new Image("/esi/atl/g43335/sokoban/resources/wall.png");
         this.player = new Image("/esi/atl/g43335/sokoban/resources/player.png");
         this.endLevel = new Image("/esi/atl/g43335/sokoban/resources/win.png");
+        this.surrend = new Image("/esi/atl/g43335/sokoban/resources/lose.png");
         this.game = game;
         game.start(42);
         mazeBuilder(game);
@@ -89,9 +91,12 @@ public class BoardFX extends GridPane implements Observer {
 
     @Override
     public void update() {
-        if (!game.isOver()) {
+        if (!game.isOver() && !game.isSurrend()) {
             this.getChildren().clear();
             mazeBuilder(game);
+        } else if (!game.isOver() && game.isSurrend()) {
+            this.getChildren().clear();
+            this.getChildren().add(new ImageView(surrend));
         } else {
             this.getChildren().clear();
             this.getChildren().add(new ImageView((endLevel)));

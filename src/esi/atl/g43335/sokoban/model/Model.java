@@ -76,5 +76,7 @@ public interface Model extends Subject {
      * Redo the last command. so undo the last undo.
      */
     void redo();
+    
+    boolean isSurrend();
 
 }

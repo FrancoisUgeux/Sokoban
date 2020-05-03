@@ -21,7 +21,7 @@ public class ControllerFX {
 
     public void start() {
         scene.setOnKeyPressed((KeyEvent key) -> {
-            if (!game.isOver()) {
+            if (!game.isOver() && !game.isSurrend()) {
                 switch (key.getCode()) {
                     case Z:
                         game.move(Direction.UP);
