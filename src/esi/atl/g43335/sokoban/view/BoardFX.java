@@ -35,7 +35,7 @@ public class BoardFX extends GridPane implements Observer {
         this.sokoGoal = new Image("/esi/atl/g43335/sokoban/resources/Sokogoal.png");
         this.wall = new Image("/esi/atl/g43335/sokoban/resources/wall.png");
         this.player = new Image("/esi/atl/g43335/sokoban/resources/player.png");
-        this.endLevel = new Image("/esi/atl/g43335/sokoban/resources/player.png");
+        this.endLevel = new Image("/esi/atl/g43335/sokoban/resources/win.png");
         this.game = game;
         game.start(42);
         mazeBuilder(game);

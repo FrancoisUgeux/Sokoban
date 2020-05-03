@@ -74,21 +74,27 @@ public class StatsLeftFX extends GridPane implements Observer {
         this.add(surrender, 0, 4);
 
         Label nbMoves = new Label("Your moves :");
+        nbMoves.setFont(Font.font(30));
         this.add(nbMoves, 1, 0);
 
         nbMovesValue = new Label("0");
+        nbMovesValue.setFont(Font.font(30));
         this.add(nbMovesValue, 2, 0);
 
         Label goals = new Label("goals : ");
+        goals.setFont(Font.font(30));
         this.add(goals, 1, 1);
 
         goalsValue = new Label("0");
+        goalsValue.setFont(Font.font(30));
         this.add(goalsValue, 2, 1);
 
         Label boxGoal = new Label("goals already filled: ");
+        boxGoal.setFont(Font.font(30));
         this.add(boxGoal, 1, 2);
 
         boxGoalValue = new Label("0");
+        boxGoalValue.setFont(Font.font(30));
         this.add(boxGoalValue, 2, 2);
     }
 

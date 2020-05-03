@@ -115,6 +115,7 @@ public class Game implements Model {
 
     @Override
     public void start(int level) {
+        nbMoves = 0;
         maze = new Maze();
         maze.chooseLevel(level);
         currentLevel = level;
@@ -156,16 +157,16 @@ public class Game implements Model {
         if (maze.isFree(target) || (maze.isGoal(target) && !maze.isBoxGoal(target))) {
             Command command = new moveCommand(maze, sokoPos, target, item, nbMoves, this);
             command.execute();
-            fillUndoStackCommand(command);
+            undoStack.push(command);
             redoStack.clear();
-            nbMoves++;
+//            nbMoves++;
         } else if (canMove(target, dir) && maze.getCell(target).getItem().
                 getType() != ItemType.WALL && !maze.isBoxGoal(target.next(dir))) {
             Command command = new moveCommandPB(maze, sokoPos, target, item, dir, nbMoves, this);
             command.execute();
-            fillUndoStackCommand(command);
+            undoStack.push(command);
             redoStack.clear();
-            nbMoves++;
+//            nbMoves++;
         }
         notifyObservers();
     }
@@ -177,14 +178,14 @@ public class Game implements Model {
 
     @Override
     public void undo() {
-        fillRedoStackPeek();
+        redoStack.push(undoStack.peek());
         undoStack.pop().unexecute();
         notifyObservers();
     }
 
     @Override
     public void redo() {
-        fillUndoStackPeek();
+        undoStack.push(redoStack.peek());
         redoStack.pop().execute();
         notifyObservers();
     }
@@ -195,33 +196,6 @@ public class Game implements Model {
 
     public boolean redoStackEmpty() {
         return redoStack.empty();
-    }
-
-    private void fillUndoStackCommand(Command command) {
-        if (undoStack.size() <= MAX_STACK_SIZE) {
-            undoStack.push(command);
-        } else {
-            undoStack.remove(undoStack.firstElement());
-            undoStack.push(command);
-        }
-    }
-
-    private void fillUndoStackPeek() {
-        if (undoStack.size() <= MAX_STACK_SIZE) {
-            undoStack.push(redoStack.peek());
-        } else {
-            undoStack.remove(undoStack.firstElement());
-            undoStack.push(redoStack.peek());
-        }
-    }
-
-    private void fillRedoStackPeek() {
-        if (redoStack.size() <= MAX_STACK_SIZE) {
-            redoStack.push(undoStack.peek());
-        } else {
-            redoStack.remove(undoStack.firstElement());
-            redoStack.push(undoStack.peek());
-        }
     }
 
     @Override

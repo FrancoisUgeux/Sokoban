@@ -16,7 +16,6 @@ public class moveCommandPB implements Command {
     private final Maze maze;
     private final Position start;
     private final Position target;
-    private final Item item;
     private final Direction dir;
     private int nbMoves;
     private int nbGoals;
@@ -39,7 +38,6 @@ public class moveCommandPB implements Command {
         this.maze = maze;
         this.start = start;
         this.target = target;
-        this.item = item;
         this.dir = dir;
         this.nbMoves = nbMoves;
         nbGoals = maze.getNbGoals();
@@ -69,6 +67,7 @@ public class moveCommandPB implements Command {
         }
         sokoMove();
         maze.setStart(target);
+        game.setNbMoves(++nbMoves);
     }
 
     /**
@@ -77,7 +76,6 @@ public class moveCommandPB implements Command {
     @Override
     public void unexecute() {
         switch (option) {
-
             case 0:
                 undoStartSokoGoal();
                 maze.put(new BoxGoal(), target);

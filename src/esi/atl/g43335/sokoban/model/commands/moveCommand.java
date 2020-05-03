@@ -75,6 +75,7 @@ public class moveCommand implements Command {
         }
         sokoMove();
         maze.setStart(target);
+        game.setNbMoves(++nbMoves);
     }
 
     /**
