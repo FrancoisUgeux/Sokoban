@@ -76,7 +76,21 @@ public interface Model extends Subject {
      * Redo the last command. so undo the last undo.
      */
     void redo();
-    
+
+    /**
+     * Tell if the undoStack is empty, usefull to avoid undo on empty stack.
+     *
+     * @return true if the stack is empty.
+     */
+    boolean undoStackEmpty();
+
+    /**
+     * Tell if the redoStack is empty, usefull to avoid redo on empty stack.
+     *
+     * @return
+     */
+    boolean redoStackEmpty();
+
     boolean isSurrend();
 
 }

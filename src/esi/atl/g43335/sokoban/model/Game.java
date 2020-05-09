@@ -27,8 +27,8 @@ public class Game implements Model {
      *
      * @param nbMoves is the number of moves made by Soko
      */
-    public Game(int nbMoves) {
-        this.nbMoves = nbMoves;
+    public Game() {
+        this.nbMoves = 0;
         undoStack = new Stack<>();
         redoStack = new Stack<>();
         this.observers = new ArrayList<>();
@@ -171,14 +171,12 @@ public class Game implements Model {
             command.execute();
             undoStack.push(command);
             redoStack.clear();
-//            nbMoves++;
         } else if (canMove(target, dir) && maze.getCell(target).getItem().
                 getType() != ItemType.WALL && !maze.isBoxGoal(target.next(dir))) {
             Command command = new moveCommandPB(maze, sokoPos, target, item, dir, nbMoves, this);
             command.execute();
             undoStack.push(command);
             redoStack.clear();
-//            nbMoves++;
         }
         notifyObservers();
     }
@@ -202,10 +200,12 @@ public class Game implements Model {
         notifyObservers();
     }
 
+    @Override
     public boolean undoStackEmpty() {
         return undoStack.empty();
     }
 
+    @Override
     public boolean redoStackEmpty() {
         return redoStack.empty();
     }

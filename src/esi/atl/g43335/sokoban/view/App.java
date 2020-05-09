@@ -36,7 +36,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        this.game = new Game(0);
+        this.game = new Game();
         this.primaryStage = primaryStage;
 
         primaryStage.setTitle("Sokoban");

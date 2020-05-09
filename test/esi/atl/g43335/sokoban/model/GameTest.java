@@ -1,5 +1,6 @@
 package esi.atl.g43335.sokoban.model;
 
+import esi.atl.g43335.sokoban.model.items.Player;
 import java.util.Stack;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,7 +17,7 @@ public class GameTest {
     @Test
     public void testGetNbMoves() {
         System.out.println("getNbMoves");
-        Game instance = new Game(0);
+        Game instance = new Game();
         int expResult = 0;
         int result = instance.getNbMoves();
         assertEquals(expResult, result);
@@ -25,7 +26,7 @@ public class GameTest {
     @Test
     public void testGetMaze() {
         System.out.println("getMaze");
-        Game instance = new Game(0);
+        Game instance = new Game();
         Maze expResult = instance.getMaze();
         Maze result = instance.getMaze();
         assertEquals(expResult, result);
@@ -35,7 +36,7 @@ public class GameTest {
     public void testStart() {
         System.out.println("start");
         int level = 0;
-        Game instance = new Game(level);
+        Game instance = new Game();
         instance.start(level);
     }
 
@@ -54,7 +55,7 @@ public class GameTest {
     public void testIsGoal() {
         System.out.println("isGoal");
         Position p = new Position(1, 2);
-        Game instance = new Game(0);
+        Game instance = new Game();
         instance.start(0);
         boolean expResult = true;
         boolean result = instance.isGoal(p);
@@ -65,7 +66,7 @@ public class GameTest {
     public void testIsNoGoal() {
         System.out.println("isGoal");
         Position p = new Position(3, 2);
-        Game instance = new Game(0);
+        Game instance = new Game();
         instance.start(0);
         boolean expResult = false;
         boolean result = instance.isGoal(p);
@@ -75,7 +76,7 @@ public class GameTest {
     @Test
     public void testRestart() {
         System.out.println("restart");
-        Game instance = new Game(0);
+        Game instance = new Game();
         instance.start(0);
         Maze result = instance.getMaze();
         instance.restart();
@@ -86,11 +87,11 @@ public class GameTest {
     @Test
     public void testNextLevel() {
         System.out.println("nextLevel");
-        Game instance = new Game(0);
+        Game instance = new Game();
         instance.start(0);
         instance.nextLevel();
         Maze result = instance.getMaze();
-        Game instanceTest = new Game(0);
+        Game instanceTest = new Game();
         instanceTest.start(1);
         Maze expResult = instanceTest.getMaze();
         assertEquals(expResult, result);
@@ -100,7 +101,7 @@ public class GameTest {
     public void testMove() {
         System.out.println("move");
         Direction dir = Direction.UP;
-        Game instance = new Game(0);
+        Game instance = new Game();
         instance.start(1);
         instance.move(dir);
         ItemType result = instance.getMaze().getCell(new Position(7, 11)).
@@ -112,7 +113,7 @@ public class GameTest {
     @Test
     public void testMoveOnGoal() {
         System.out.println("moveOnGoal");
-        Game instance = new Game(0);
+        Game instance = new Game();
         instance.start(0);
         instance.move(Direction.RIGHT);
         instance.move(Direction.UP);
@@ -128,7 +129,7 @@ public class GameTest {
     public void testMoveInWall() {
         System.out.println("moveInWall");
         Direction dir = Direction.LEFT;
-        Game instance = new Game(0);
+        Game instance = new Game();
         instance.start(1);
         instance.move(dir);
         ItemType result = instance.getMaze().getCell(new Position(8, 11)).
@@ -140,7 +141,7 @@ public class GameTest {
     @Test
     public void testMoveBox(){
         System.out.println("moveBox");
-        Game instance = new Game(0);
+        Game instance = new Game();
         Position pos = new Position(2,3);
         instance.start(0);
         instance.move(Direction.LEFT);
@@ -154,7 +155,7 @@ public class GameTest {
     @Test
     public void testMoveBoxInWall(){
         System.out.println("moveBoxInWall");
-        Game instance = new Game(0);
+        Game instance = new Game();
         Position pos = new Position(2,3);
         instance.start(0);
         instance.move(Direction.LEFT);
@@ -169,7 +170,7 @@ public class GameTest {
     @Test
     public void testMoveBoxOnGoal(){
         System.out.println("moveBoxOnGoal");
-        Game instance = new Game(0);
+        Game instance = new Game();
         Position pos = new Position(1,2);
         instance.start(0);
         instance.move(Direction.UP);
@@ -181,7 +182,7 @@ public class GameTest {
     @Test
     public void testMoveBoxFromGoal(){
         System.out.println("moveBoxFromGoal");
-        Game instance = new Game(0);
+        Game instance = new Game();
         Position pos = new Position(1,1);
         instance.start(0);
         instance.move(Direction.UP);
@@ -196,7 +197,7 @@ public class GameTest {
     @Test
     public void testMoveBoxinWallFromSokoGoal(){
         System.out.println("moveBoxInWallFromSokoGoal");
-        Game instance = new Game(0);
+        Game instance = new Game();
         Position pos = new Position(1,1);
         instance.start(0);
         instance.move(Direction.UP);
@@ -212,7 +213,7 @@ public class GameTest {
     @Test
     public void testMoveBoxinWallFromBoxGoal(){
         System.out.println("moveBoxInWallFromSokoGoal");
-        Game instance = new Game(0);
+        Game instance = new Game();
         Position pos = new Position(1,2);
         instance.start(0);
         instance.move(Direction.UP);
@@ -227,7 +228,7 @@ public class GameTest {
         System.out.println("canMove");
         Position pos = new Position(2, 5);
         Direction dir = Direction.DOWN;
-        Game instance = new Game(0);
+        Game instance = new Game();
         instance.start(1);
         boolean expResult = true;
         boolean result = instance.canMove(pos, dir);
@@ -239,7 +240,7 @@ public class GameTest {
         System.out.println("cantMove");
         Position pos = new Position(3, 7);
         Direction dir = Direction.DOWN;
-        Game instance = new Game(0);
+        Game instance = new Game();
         instance.start(1);
         boolean expResult = false;
         boolean result = instance.canMove(pos, dir);
@@ -249,117 +250,100 @@ public class GameTest {
     @Test
     public void testGetCurrentLevel() {
         System.out.println("getCurrentLevel");
-        Game instance = null;
-        int expResult = 0;
+        Game instance = new Game();
+        instance.start(1);
+        int expResult = 1;
         int result = instance.getCurrentLevel();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
     }
 
     @Test
     public void testGetNbGoals() {
         System.out.println("getNbGoals");
-        Game instance = null;
-        int expResult = 0;
+        Game instance = new Game();
+        instance.start(1);
+        int expResult = 6;
         int result = instance.getNbGoals();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
     }
 
     @Test
     public void testGetMaxNbGoals() {
         System.out.println("getMaxNbGoals");
-        Game instance = null;
-        int expResult = 0;
+        Game instance = new Game();
+        instance.start(1);
+        int expResult = 6;
         int result = instance.getMaxNbGoals();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
     }
 
     @Test
     public void testSetNbMoves() {
         System.out.println("setNbMoves");
-        int nbMoves = 0;
-        Game instance = null;
+        int nbMoves = 10;
+        Game instance = new Game();
         instance.setNbMoves(nbMoves);
-        fail("The test case is a prototype.");
+        int expResult = 10;
+        int result = instance.getNbMoves();
+        assertEquals(expResult, result);
     }
 
     @Test
     public void testGetUndoStack() {
         System.out.println("getUndoStack");
-        Game instance = null;
+        Game instance = new Game();
         Stack<Command> expResult = null;
         Stack<Command> result = instance.getUndoStack();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
     }
 
     @Test
     public void testGetRedoStack() {
         System.out.println("getRedoStack");
-        Game instance = null;
+        Game instance = new Game();
         Stack<Command> expResult = null;
         Stack<Command> result = instance.getRedoStack();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
     }
 
     @Test
     public void testIsSurrend() {
         System.out.println("isSurrend");
-        Game instance = null;
+        Game instance = new Game();
+        instance.start(0);
         boolean expResult = false;
         boolean result = instance.isSurrend();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
     }
 
     @Test
     public void testSetSurrend() {
         System.out.println("setSurrend");
-        Game instance = null;
+        Game instance = new Game();
+        instance.start(0);
         instance.setSurrend();
-        fail("The test case is a prototype.");
-    }
-
-    @Test
-    public void testHashCode() {
-        System.out.println("hashCode");
-        Game instance = null;
-        int expResult = 0;
-        int result = instance.hashCode();
+        boolean expResult = true;
+        boolean result = instance.isSurrend();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
-    }
-
-    @Test
-    public void testEquals() {
-        System.out.println("equals");
-        Object obj = null;
-        Game instance = null;
-        boolean expResult = false;
-        boolean result = instance.equals(obj);
-        assertEquals(expResult, result);
-        fail("The test case is a prototype.");
     }
 
     @Test
     public void testIsOver() {
         System.out.println("isOver");
-        Game instance = null;
+        Game instance = new Game();
+        instance.start(0);
         boolean expResult = false;
         boolean result = instance.isOver();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
     }
 
     @Test
     public void testUndo() {
         System.out.println("undo");
-        Game instance = null;
+        Game instance = new Game();
+        instance.start(0);
         instance.undo();
-        fail("The test case is a prototype.");
+        Item expResult = new Player();
     }
 
     @Test
@@ -373,11 +357,10 @@ public class GameTest {
     @Test
     public void testUndoStackEmpty() {
         System.out.println("undoStackEmpty");
-        Game instance = null;
-        boolean expResult = false;
+        Game instance = new Game();
+        boolean expResult = true;
         boolean result = instance.undoStackEmpty();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
     }
 
     @Test
@@ -387,32 +370,6 @@ public class GameTest {
         boolean expResult = false;
         boolean result = instance.redoStackEmpty();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
-    }
-
-    @Test
-    public void testRegisterObserver() {
-        System.out.println("registerObserver");
-        Observer obs = null;
-        Game instance = null;
-        instance.registerObserver(obs);
-        fail("The test case is a prototype.");
-    }
-
-    @Test
-    public void testRemove() {
-        System.out.println("remove");
-        Observer obs = null;
-        Game instance = null;
-        instance.remove(obs);
-        fail("The test case is a prototype.");
-    }
-
-    @Test
-    public void testNotifyObservers() {
-        System.out.println("notifyObservers");
-        Game instance = null;
-        instance.notifyObservers();
         fail("The test case is a prototype.");
     }
 }

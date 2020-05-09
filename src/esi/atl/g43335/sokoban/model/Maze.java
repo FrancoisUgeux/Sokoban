@@ -5,7 +5,6 @@ import esi.atl.g43335.sokoban.model.items.Wall;
 import esi.atl.g43335.sokoban.model.items.Goal;
 import esi.atl.g43335.sokoban.model.items.Box;
 import esi.atl.g43335.sokoban.model.items.Player;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
