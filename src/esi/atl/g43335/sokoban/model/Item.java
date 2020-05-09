@@ -9,17 +9,17 @@ import java.util.Objects;
  */
 public class Item {
 
-    private ItemType type;
-    private boolean Moveable;
+    private final ItemType type;
+//    private final boolean Moveable;
 
     /**
      *
      * @param type is the kind of element of this item.
      * @param isMoveable tell if this item can move or be moved.
      */
-    public Item(ItemType type, boolean isMoveable) {
+    public Item(ItemType type) { //, boolean isMoveable
         this.type = type;
-        this.Moveable = isMoveable;
+//        this.Moveable = isMoveable;
     }
 
     /**
@@ -34,7 +34,7 @@ public class Item {
     public int hashCode() {
         int hash = 5;
         hash = 53 * hash + Objects.hashCode(this.type);
-        hash = 53 * hash + (this.Moveable ? 1 : 0);
+//        hash = 53 * hash + (this.Moveable ? 1 : 0);
         return hash;
     }
 
@@ -50,20 +50,17 @@ public class Item {
             return false;
         }
         final Item other = (Item) obj;
-        if (this.Moveable != other.Moveable) {
-            return false;
-        }
-        if (this.type != other.type) {
-            return false;
-        }
-        return true;
+//        if (this.Moveable != other.Moveable) {
+//            return false;
+//        }
+        return this.type == other.type;
     }
 
     /**
      *
      * @return true if this item can move.
      */
-    public boolean isMoveable() {
-        return Moveable;
-    }
+//    public boolean isMoveable() {
+//        return Moveable;
+//    }
 }

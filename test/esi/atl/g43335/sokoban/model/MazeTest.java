@@ -213,7 +213,7 @@ public class MazeTest {
         System.out.println("remove");
         Position pos = new Position(1, 1);
         Maze instance = new Maze();
-        instance.put(new Item(ItemType.GOAL, false), pos);
+        instance.put(new Item(ItemType.GOAL), pos);
         instance.remove(pos);
         Item expResult = new Floor();
         Item result = instance.getCell(pos).getItem();

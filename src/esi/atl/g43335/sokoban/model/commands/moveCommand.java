@@ -1,7 +1,6 @@
 package esi.atl.g43335.sokoban.model.commands;
 
 import esi.atl.g43335.sokoban.model.Command;
-import esi.atl.g43335.sokoban.model.Direction;
 import esi.atl.g43335.sokoban.model.Game;
 import esi.atl.g43335.sokoban.model.Item;
 import esi.atl.g43335.sokoban.model.Maze;
@@ -9,7 +8,6 @@ import esi.atl.g43335.sokoban.model.Position;
 import esi.atl.g43335.sokoban.model.items.Goal;
 import esi.atl.g43335.sokoban.model.items.Player;
 import esi.atl.g43335.sokoban.model.items.SokoGoal;
-import java.util.ArrayList;
 
 /**
  *

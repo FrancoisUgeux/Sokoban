@@ -1,5 +1,6 @@
 package esi.atl.g43335.sokoban.model;
 
+import java.util.Stack;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -243,5 +244,175 @@ public class GameTest {
         boolean expResult = false;
         boolean result = instance.canMove(pos, dir);
         assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testGetCurrentLevel() {
+        System.out.println("getCurrentLevel");
+        Game instance = null;
+        int expResult = 0;
+        int result = instance.getCurrentLevel();
+        assertEquals(expResult, result);
+        fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testGetNbGoals() {
+        System.out.println("getNbGoals");
+        Game instance = null;
+        int expResult = 0;
+        int result = instance.getNbGoals();
+        assertEquals(expResult, result);
+        fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testGetMaxNbGoals() {
+        System.out.println("getMaxNbGoals");
+        Game instance = null;
+        int expResult = 0;
+        int result = instance.getMaxNbGoals();
+        assertEquals(expResult, result);
+        fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testSetNbMoves() {
+        System.out.println("setNbMoves");
+        int nbMoves = 0;
+        Game instance = null;
+        instance.setNbMoves(nbMoves);
+        fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testGetUndoStack() {
+        System.out.println("getUndoStack");
+        Game instance = null;
+        Stack<Command> expResult = null;
+        Stack<Command> result = instance.getUndoStack();
+        assertEquals(expResult, result);
+        fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testGetRedoStack() {
+        System.out.println("getRedoStack");
+        Game instance = null;
+        Stack<Command> expResult = null;
+        Stack<Command> result = instance.getRedoStack();
+        assertEquals(expResult, result);
+        fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testIsSurrend() {
+        System.out.println("isSurrend");
+        Game instance = null;
+        boolean expResult = false;
+        boolean result = instance.isSurrend();
+        assertEquals(expResult, result);
+        fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testSetSurrend() {
+        System.out.println("setSurrend");
+        Game instance = null;
+        instance.setSurrend();
+        fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testHashCode() {
+        System.out.println("hashCode");
+        Game instance = null;
+        int expResult = 0;
+        int result = instance.hashCode();
+        assertEquals(expResult, result);
+        fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testEquals() {
+        System.out.println("equals");
+        Object obj = null;
+        Game instance = null;
+        boolean expResult = false;
+        boolean result = instance.equals(obj);
+        assertEquals(expResult, result);
+        fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testIsOver() {
+        System.out.println("isOver");
+        Game instance = null;
+        boolean expResult = false;
+        boolean result = instance.isOver();
+        assertEquals(expResult, result);
+        fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testUndo() {
+        System.out.println("undo");
+        Game instance = null;
+        instance.undo();
+        fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testRedo() {
+        System.out.println("redo");
+        Game instance = null;
+        instance.redo();
+        fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testUndoStackEmpty() {
+        System.out.println("undoStackEmpty");
+        Game instance = null;
+        boolean expResult = false;
+        boolean result = instance.undoStackEmpty();
+        assertEquals(expResult, result);
+        fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testRedoStackEmpty() {
+        System.out.println("redoStackEmpty");
+        Game instance = null;
+        boolean expResult = false;
+        boolean result = instance.redoStackEmpty();
+        assertEquals(expResult, result);
+        fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testRegisterObserver() {
+        System.out.println("registerObserver");
+        Observer obs = null;
+        Game instance = null;
+        instance.registerObserver(obs);
+        fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testRemove() {
+        System.out.println("remove");
+        Observer obs = null;
+        Game instance = null;
+        instance.remove(obs);
+        fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testNotifyObservers() {
+        System.out.println("notifyObservers");
+        Game instance = null;
+        instance.notifyObservers();
+        fail("The test case is a prototype.");
     }
 }

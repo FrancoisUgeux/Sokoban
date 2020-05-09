@@ -10,11 +10,10 @@ import esi.atl.g43335.sokoban.model.ItemType;
 public class BoxGoal extends Item {
 
     /**
-     * Create a box placed on a goal. This box can move ==> isMoveable
-     * initialized at true.
+     * Create a box placed on a goal. This box can move.
      */
     public BoxGoal() {
-        super(ItemType.BOXGOAL, true);
+        super(ItemType.BOXGOAL); 
     }
 
 }

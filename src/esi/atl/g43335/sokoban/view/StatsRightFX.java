@@ -17,8 +17,8 @@ public class StatsRightFX extends GridPane implements Observer {
     private VBox undoList;
     private VBox redoList;
     private final Game game;
-    private Label undo;
-    private Label redo;
+    private Label undo = new Label("");
+    private Label redo = new Label("");
     private final int MAX_STACK = 33;
 
     public StatsRightFX(Game game) {

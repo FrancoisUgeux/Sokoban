@@ -20,7 +20,7 @@ public class CellTest {
     @Test
     public void testGetItemFloor() {
         System.out.println("getItemFloor");
-        Item item = new Item(ItemType.FLOOR, false);
+        Item item = new Item(ItemType.FLOOR);
         Cell instance = new Cell(item);
         Item expResult = item;
         Item result = instance.getItem();
@@ -30,7 +30,7 @@ public class CellTest {
     @Test
     public void testGetItemGoal() {
         System.out.println("getItemGoal");
-        Item item = new Item(ItemType.GOAL, false);
+        Item item = new Item(ItemType.GOAL);
         Cell instance = new Cell(item);
         Item expResult = item;
         Item result = instance.getItem();
@@ -40,7 +40,7 @@ public class CellTest {
     @Test
     public void testGetItemPlayer() {
         System.out.println("getItemPlayer");
-        Item item = new Item(ItemType.PLAYER, false);
+        Item item = new Item(ItemType.PLAYER);
         Cell instance = new Cell(item);
         Item expResult = item;
         Item result = instance.getItem();
@@ -50,7 +50,7 @@ public class CellTest {
     @Test
     public void testGetItemBox() {
         System.out.println("getItemBox");
-        Item item = new Item(ItemType.BOX, true);
+        Item item = new Item(ItemType.BOX);
         Cell instance = new Cell(item);
         Item expResult = item;
         Item result = instance.getItem();
@@ -60,7 +60,7 @@ public class CellTest {
     @Test
     public void testGetItemWall() {
         System.out.println("getItemWall");
-        Item item = new Item(ItemType.WALL, false);
+        Item item = new Item(ItemType.WALL);
         Cell instance = new Cell(item);
         Item expResult = item;
         Item result = instance.getItem();
@@ -70,7 +70,7 @@ public class CellTest {
     @Test
     public void testGetItemSokoGoal() {
         System.out.println("getItemSokoGoal");
-        Item item = new Item(ItemType.SOKOGOAL, true);
+        Item item = new Item(ItemType.SOKOGOAL);
         Cell instance = new Cell(item);
         Item expResult = item;
         Item result = instance.getItem();
@@ -80,7 +80,7 @@ public class CellTest {
     @Test
     public void testGetItemBoxGoal() {
         System.out.println("getItemBoxGoal");
-        Item item = new Item(ItemType.BOXGOAL, true);
+        Item item = new Item(ItemType.BOXGOAL);
         Cell instance = new Cell(item);
         Item expResult = item;
         Item result = instance.getItem();
@@ -99,7 +99,7 @@ public class CellTest {
     @Test
     public void testIsNotFree() {
         System.out.println("isNotFree");
-        Item item = new Item(ItemType.BOXGOAL, true);
+        Item item = new Item(ItemType.BOXGOAL);
         Cell instance = new Cell(item);
         boolean expResult = false;
         boolean result = instance.isFree();
@@ -109,7 +109,7 @@ public class CellTest {
     @Test
     public void testPut() {
         System.out.println("put");
-        Item item = new Item(ItemType.GOAL, false);
+        Item item = new Item(ItemType.GOAL);
         Cell instance = new Cell();
         instance.put(item);
         Item expResult = item;
@@ -119,7 +119,7 @@ public class CellTest {
     @Test
     public void testRemove() {
         System.out.println("remove");
-        Item item = new Item(ItemType.BOXGOAL, true);
+        Item item = new Item(ItemType.BOXGOAL);
         Cell instance = new Cell();
         instance.put(item);
         instance.remove();

@@ -10,10 +10,10 @@ import esi.atl.g43335.sokoban.model.ItemType;
 public class SokoGoal extends Item {
 
     /**
-     * Create Soko on a goal, Soko can move ==> isMoveable initialized at true.
+     * Create Soko on a goal, Soko can move.
      */
     public SokoGoal() {
-        super(ItemType.SOKOGOAL, true);
+        super(ItemType.SOKOGOAL);
     }
 
 }

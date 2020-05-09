@@ -44,7 +44,7 @@ public class BoardFX extends GridPane implements Observer {
 
     }
 
-    public void mazeBuilder(Game game) {
+    private void mazeBuilder(Game game) {
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
                 ItemType itemType = game.getMaze().getCell(new Position(i, j)).getItem().getType();

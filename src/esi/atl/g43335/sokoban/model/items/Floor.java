@@ -10,10 +10,10 @@ import esi.atl.g43335.sokoban.model.ItemType;
 public class Floor extends Item {
 
     /**
-     * Create a floor. a floor can't move ==> isMoveable initialized at false.
+     * Create a floor. a floor can't move.
      */
     public Floor() {
-        super(ItemType.FLOOR, false);
+        super(ItemType.FLOOR);
     }
 
 }

@@ -12,10 +12,9 @@ import esi.atl.g43335.sokoban.model.ItemType;
 public class Player extends Item {
 
     /**
-     *
-     * @param nbMoves is the number of moves made by Soko.
+     * Create a player, the player can move.
      */
     public Player() {
-        super(ItemType.PLAYER, true);
+        super(ItemType.PLAYER);
     }
 }

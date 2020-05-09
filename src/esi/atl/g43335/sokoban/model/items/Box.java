@@ -10,9 +10,9 @@ import esi.atl.g43335.sokoban.model.ItemType;
 public class Box extends Item {
 
     /**
-     * Create a box, a box can move ==> isMoveable initialized at true.
+     * Create a box, a box can move.
      */
     public Box() {
-        super(ItemType.BOX, true);
+        super(ItemType.BOX);
     }
 }
